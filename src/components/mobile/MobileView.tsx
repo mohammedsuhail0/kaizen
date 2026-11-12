@@ -207,10 +207,12 @@ export const MobileView: React.FC<MobileViewProps> = ({ initialSection = 'hero',
           {onOpenChat ? (
             <button
               onClick={onOpenChat}
-              className="touch-target flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-mono text-xs font-bold uppercase tracking-wider active:scale-95 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.35)] cursor-pointer"
+              className="touch-target flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-neutral-200 text-xs font-mono tracking-wider active:scale-95 transition-transform backdrop-blur-md cursor-pointer"
+              title="Open Kaizen Concierge"
+              aria-label="Open Kaizen Concierge"
             >
-              <MessageSquare className="w-4 h-4 text-slate-950" />
-              <span>ASK ME</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-soft-breath shrink-0" />
+              <span>Concierge</span>
             </button>
           ) : (
             <a

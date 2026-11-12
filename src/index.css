@@ -43,6 +43,21 @@
   --duration-normal: 240ms;
 }
 
+@keyframes softBreath {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+}
+
+.animate-soft-breath {
+  animation: softBreath 3.2s ease-in-out infinite;
+}
+
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;

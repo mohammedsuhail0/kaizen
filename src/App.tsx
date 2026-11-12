@@ -8,8 +8,8 @@ import { PortfolioShowcase } from './components/PortfolioShowcase';
 import { EstimatorSection } from './components/EstimatorSection';
 import { BrandSection } from './components/BrandSection';
 import { MobileView } from './components/mobile/MobileView';
-import { AgenticChatModal } from './components/AgenticChatModal';
-import { AIConsultantFloatingTrigger } from './components/AIConsultantFloatingTrigger';
+import { ChatDrawer } from './components/ChatDrawer';
+import { ChatLauncher } from './components/ChatLauncher';
 
 export function App() {
   const [isPreloading, setIsPreloading] = useState(true);
@@ -131,14 +131,15 @@ export function App() {
           </div>
         </main>
 
-        {/* Floating AI Consultant Assistant with Speech Bubble Prompt */}
-        <AIConsultantFloatingTrigger
+        {/* Floating Zen Studio Concierge Pill Launcher & Teaser Note */}
+        <ChatLauncher
           onOpenChat={() => setIsChatOpen(true)}
+          isOpen={isChatOpen}
         />
       </div>
 
-      {/* 4. Global Groq Agentic RAG Sales Consultant Drawer */}
-      <AgenticChatModal
+      {/* 4. Global Kaizen Solutions Architect Drawer (Zen Twilight Ink Theme) */}
+      <ChatDrawer
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
       />

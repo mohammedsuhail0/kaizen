@@ -222,8 +222,8 @@ export default async function handler(req: Request) {
       { role: 'user', content: query },
     ];
 
-    // Ultra-reliable active models on this key: primary 20b, then 27b, then 120b
-    const candidateModels = ['openai/gpt-oss-20b', 'qwen/qwen3.8-27b', 'openai/gpt-oss-120b'];
+    // Ultra-reliable active models on this key: primary Qwen 27b (instant response, 0 reasoning delay), then 120b, then 20b
+    const candidateModels = ['qwen/qwen3.8-27b', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b'];
     let groqRes: Response | null = null;
     let lastError = '';
 

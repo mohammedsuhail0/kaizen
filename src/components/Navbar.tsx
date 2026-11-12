@@ -102,10 +102,12 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
           {onOpenChat ? (
             <button
               onClick={onOpenChat}
-              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 text-xs font-mono font-bold tracking-wider uppercase transition-[transform,box-shadow] duration-150 active:scale-95 shadow-[0_0_15px_rgba(16,185,129,0.35)] cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-neutral-200 hover:text-white text-xs font-mono tracking-wider transition-all duration-150 active:scale-95 cursor-pointer backdrop-blur-md"
+              title="Open Kaizen Concierge"
+              aria-label="Open Kaizen Concierge"
             >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>ASK ME</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-soft-breath shrink-0" />
+              <span>Concierge</span>
             </button>
           ) : (
             <a
