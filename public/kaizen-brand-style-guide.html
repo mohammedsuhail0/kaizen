@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaizen Software Agency · Brand Style Guide & Theme Standard</title>
+  
+  <!-- Google Fonts: Luxury Editorial Serif + Technical Sans + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #06090E;
+      --card-bg: rgba(11, 16, 25, 0.90);
+      --card-border: rgba(0, 245, 255, 0.28);
+      --card-border-subtle: rgba(255, 255, 255, 0.08);
+      --cyan-core: #00F5FF;
+      --cyan-glow: rgba(0, 245, 255, 0.45);
+      --cyan-hover: #00C8FF;
+      --cobalt: #0077FF;
+      --sapphire: #0052CC;
+      --azure-light: #38BDF8;
+      --emerald-trust: #10B981;
+      --paper: #F0FDFE;
+      --text: #F1F5F9;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+      --font-serif: 'Newsreader', Georgia, serif;
+      --font-display: 'Cinzel', serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
+      --font-jp: 'Noto Serif JP', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      background-image: 
+        radial-gradient(circle at 12% 14%, rgba(0, 245, 255, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 88% 82%, rgba(0, 119, 255, 0.16) 0%, transparent 46%),
+        radial-gradient(rgba(0, 245, 255, 0.08) 1px, transparent 0);
+      background-size: 100% 100%, 100% 100%, 26px 26px;
+      padding: 16px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* THEME BOARD CONTAINER (Matches C3 Reference 1440px Ratio) */
+    .plate-container {
+      width: 1440px;
+      max-width: 100%;
+      background: rgba(9, 13, 20, 0.97);
+      border: 1.5px solid rgba(0, 245, 255, 0.42);
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95), 0 0 60px -10px rgba(0, 245, 255, 0.25);
+      border-radius: 12px;
+      padding: 20px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plate-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      pointer-events: none;
+      border-radius: 11px;
+    }
+
+    /* TOP HEADER BAR */
+    .plate-header {
+      display: grid;
+      grid-template-columns: 1.4fr auto 1.4fr;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 2px solid rgba(0, 245, 255, 0.35);
+      margin-bottom: 14px;
+    }
+
+    .brand-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* KAIZEN SVG LOGO IN HEADER */
+    .header-logo-svg {
+      width: 44px;
+      height: 44px;
+      filter: drop-shadow(0 0 12px rgba(0, 245, 255, 0.6));
+      shrink: 0;
+    }
+
+    .brand-header-text-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand-tagline-head {
+      font-family: var(--font-sans);
+      font-size: 21px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .brand-tagline-head .lambda-a {
+      color: var(--cyan-core);
+      text-shadow: 0 0 12px rgba(0, 245, 255, 0.8);
+      padding: 0 1px;
+    }
+
+    .brand-subline {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 2.2px;
+      color: var(--cyan-core);
+      text-transform: uppercase;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    .center-label {
+      text-align: center;
+      padding: 0 15px;
+    }
+
+    .center-label h2 {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 4px;
+      color: #FFFFFF;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(0, 245, 255, 0.4);
+      padding-bottom: 3px;
+      display: inline-block;
+    }
+
+    .center-label p {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    /* RIGHT STUDIO BADGE (NO COLLEGE / PURE KAIZEN SEAL) */
+    .studio-header-wrap {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .studio-seal-stamp {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--cyan-core);
+      border-radius: 6px;
+      background: rgba(0, 245, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-jp);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--cyan-core);
+      box-shadow: 0 0 14px rgba(0, 245, 255, 0.4), inset 0 0 8px rgba(0, 245, 255, 0.2);
+    }
+
+    .studio-header-meta {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+
+    .studio-meta-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .studio-meta-sub {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--cyan-core);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    /* GRID SECTION LAYOUTS (Exact Matches to C3) */
+    .grid-row {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .row-top {
+      grid-template-columns: 2.2fr 2.6fr 2.4fr 2fr;
+    }
+
+    .row-middle {
+      grid-template-columns: 1fr;
+    }
+
+    .row-lower {
+      grid-template-columns: 2.4fr 3.6fr 3fr;
+    }
+
+    .row-bottom {
+      grid-template-columns: 2.3fr 2.2fr 2.5fr 3fr;
+    }
+
+    /* BOX CARD STYLING */
+    .box-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-subtle);
+      border-radius: 8px;
+      padding: 12px 14px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+    }
+
+    .box-card:hover {
+      border-color: rgba(0, 245, 255, 0.45);
+      box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.7);
+    }
+
+    .box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .box-num-title {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .box-num-title .num {
+      color: var(--cyan-core);
+    }
+
+    .box-sublabel {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      color: var(--text-subtle);
+      letter-spacing: 1px;
+    }
+
+    /* 1. IDENTITY STYLES */
+    .meta-group {
+      margin-bottom: 6px;
+    }
+
+    .meta-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .meta-lbl {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--cyan-core);
+      display: block;
+      margin-bottom: 1px;
+      font-weight: 600;
+    }
+
+    .meta-val {
+      font-size: 11.5px;
+      color: #FFFFFF;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .meta-val.serif {
+      font-family: var(--font-serif);
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--paper);
+    }
+
+    .highlight-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 6px;
+      margin-top: 3px;
+    }
+
+    .highlight-list li {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 10px;
+      font-family: var(--font-mono);
+    }
+
+    .highlight-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--cyan-core);
+      font-size: 9.5px;
+    }
+
+    /* 2 & 3. OFFICIAL LOGO DISPLAY */
+    .logo-stage {
+      height: 124px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, rgba(0, 245, 255, 0.16) 0%, rgba(6, 10, 16, 0.88) 75%);
+      border-radius: 6px;
+      border: 1px dashed rgba(0, 245, 255, 0.35);
+      position: relative;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .logo-stage-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo-divider-v {
+      width: 2px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--cyan-core), transparent);
+    }
+
+    .wordmark-wrap {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .wm-title {
+      font-family: var(--font-sans);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: #FFFFFF;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .wm-title .lambda {
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      background-image: linear-gradient(135deg, #00F5FF, #0077FF);
+      padding: 0 1px;
+      filter: drop-shadow(0 0 10px rgba(0, 245, 255, 0.8));
+    }
+
+    .wm-sub {
+      font-family: var(--font-sans);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .wm-accent-bar {
+      width: 140px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan-core), transparent);
+      box-shadow: 0 0 10px #00F5FF;
+      margin-top: 6px;
+    }
+
+    .wm-tagline {
+      font-family: var(--font-sans);
+      font-size: 7px;
+      letter-spacing: 0.28em;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* 3. SYMBOL / MARK DUAL STAGE */
+    .logo-stage-dual {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 124px;
+      background: radial-gradient(circle at center, rgba(0, 119, 255, 0.15) 0%, rgba(6, 10, 16, 0.88) 75%);
+      border-radius: 6px;
+      border: 1px dashed rgba(0, 245, 255, 0.25);
+      padding: 8px 12px;
+    }
+
+    .mark-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mark-sub {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--text-muted);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    /* 4. ZEN SEAL & ORIGIN */
+    .seal-stage {
+      height: 124px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 6px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .seal-box-lg {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--cyan-core);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-jp);
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--cyan-core);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), inset 0 0 10px rgba(0, 245, 255, 0.25);
+      background: rgba(0, 245, 255, 0.06);
+    }
+
+    .seal-sub-caption {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* 5. COLOR PALETTE ROW */
+    .color-section-grid {
+      display: grid;
+      grid-template-columns: 2fr 2.4fr 1.6fr;
+      gap: 14px;
+    }
+
+    .color-category-title {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--cyan-core);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .swatch-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .swatch-card {
+      flex: 1;
+      min-width: 78px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .swatch-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--cyan-core);
+      box-shadow: 0 4px 14px rgba(0, 245, 255, 0.3);
+    }
+
+    .swatch-fill {
+      height: 44px;
+      width: 100%;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .swatch-meta {
+      padding: 5px 6px;
+    }
+
+    .swatch-name {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+      display: block;
+    }
+
+    /* 6. TYPOGRAPHY BOX */
+    .type-specimen {
+      margin-bottom: 8px;
+    }
+
+    .type-specimen:last-child {
+      margin-bottom: 0;
+    }
+
+    .type-label {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      color: var(--cyan-core);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+
+    .type-demo-primary {
+      font-family: var(--font-serif);
+      font-size: 21px;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1.15;
+    }
+
+    .type-demo-primary span {
+      color: var(--cyan-core);
+      font-style: italic;
+    }
+
+    .type-demo-sec {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--azure-light);
+      letter-spacing: 1px;
+    }
+
+    .type-demo-body {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* 7. VISUAL ELEMENTS & TEXTURES */
+    .textures-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      height: 72px;
+    }
+
+    .texture-box {
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .texture-particles {
+      background: 
+        radial-gradient(circle at 75% 25%, rgba(0, 245, 255, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 25% 75%, rgba(0, 119, 255, 0.3) 0%, transparent 40%),
+        #0A101A;
+    }
+
+    .texture-particles::after {
+      content: '🌸 ✦ 🌸 ✦';
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 11px;
+      opacity: 0.7;
+      filter: hue-rotate(180deg) brightness(1.6);
+    }
+
+    .texture-spotlight {
+      background: radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.55) 0%, rgba(7, 12, 19, 0.9) 70%);
+    }
+
+    .texture-blueprint {
+      background-color: #080D15;
+      background-image: radial-gradient(rgba(0, 245, 255, 0.25) 1px, transparent 0);
+      background-size: 12px 12px;
+    }
+
+    .texture-caption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .texture-desc {
+      font-family: var(--font-mono);
+      font-size: 7px;
+      color: var(--cyan-core);
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    /* 8. ICON STYLE REFERENCE */
+    .icons-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+    }
+
+    .icon-cell {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 6px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .icon-cell:hover {
+      border-color: var(--cyan-core);
+    }
+
+    .icon-symbol {
+      font-size: 18px;
+      margin-bottom: 3px;
+      filter: drop-shadow(0 0 6px rgba(0, 245, 255, 0.7));
+    }
+
+    .icon-title {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .icon-sub {
+      font-family: var(--font-mono);
+      font-size: 6.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+    }
+
+    /* 9. POSTER / HERO REFERENCE */
+    .poster-miniature {
+      height: 95px;
+      background: linear-gradient(135deg, rgba(10, 16, 26, 0.95), rgba(0, 30, 60, 0.9)), url('assets/kaizen-original-logo.png') center/cover;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poster-mini-sub {
+      font-family: var(--font-mono);
+      font-size: 7.5px;
+      letter-spacing: 2px;
+      color: var(--cyan-core);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .poster-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .poster-badge {
+      font-family: var(--font-mono);
+      font-size: 7px;
+      padding: 2px 5px;
+      border-radius: 3px;
+      background: rgba(0, 245, 255, 0.18);
+      color: var(--cyan-core);
+      border: 1px solid rgba(0, 245, 255, 0.4);
+      font-weight: 700;
+    }
+
+    /* 11. DESIGN TONE & MOOD PILLS */
+    .tone-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tone-pill {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+    }
+
+    .tone-pill.active {
+      background: rgba(0, 245, 255, 0.15);
+      border-color: var(--cyan-core);
+      color: #FFFFFF;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.25);
+    }
+
+    /* 12. KEY MESSAGING */
+    .messaging-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .message-item {
+      font-family: var(--font-serif);
+      font-size: 11px;
+      color: #FFFFFF;
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 2px solid var(--cyan-core);
+      padding: 3px 7px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .message-item em {
+      color: var(--cyan-core);
+      font-style: italic;
+    }
+
+    /* TOAST ALERT FOR COPY */
+    .copy-toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--cyan-core);
+      color: #06090E;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 245, 255, 0.6);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="plate-container" id="brandPlate">
+    
+    <!-- ==================== HEADER BAR ==================== -->
+    <header class="plate-header">
+      <div class="brand-title-wrap">
+        <!-- OFFICIAL GEOMETRIC K LOGO -->
+        <svg viewBox="0 0 120 120" class="header-logo-svg" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00F5FF" />
+              <stop offset="50%" stop-color="#00C8FF" />
+              <stop offset="100%" stop-color="#0077FF" />
+            </linearGradient>
+          </defs>
+          <path d="M 22 15 L 42 15 L 42 105 L 22 105 Z" fill="#FFFFFF" />
+          <path d="M 22 56 L 88 15 L 105 15 L 38 67 Z" fill="url(#headerGrad)" />
+          <path d="M 42 66 L 98 105 L 76 105 L 32 73 Z" fill="#FFFFFF" />
+        </svg>
+
+        <div class="brand-header-text-block">
+          <div class="brand-tagline-head">
+            <span>K</span><span class="lambda-a">Λ</span><span>IZEN</span>
+          </div>
+          <div class="brand-subline">SOFTWARE AGENCY · BESPOKE DIGITAL SYSTEMS</div>
+        </div>
+      </div>
+
+      <div class="center-label">
+        <h2>BRAND STYLE GUIDE</h2>
+        <p>OFFICIAL VISUAL &amp; THEME STANDARD FOR ALL KAIZEN ASSETS</p>
+      </div>
+
+      <div class="studio-header-wrap">
+        <div class="studio-header-meta">
+          <span class="studio-meta-title">KAIZEN SOFTWARE STUDIO</span>
+          <span class="studio-meta-sub">HYDERABAD · EST. 2024</span>
+        </div>
+        <div class="studio-seal-stamp" title="Kaizen (改善) - Continuous Improvement">改善</div>
+      </div>
+    </header>
+
+    <!-- ==================== ROW 1: TOP ROW (1, 2, 3, 4) ==================== -->
+    <div class="grid-row row-top">
+      
+      <!-- 1. BRAND IDENTITY -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">1.</span> BRAND IDENTITY</div>
+          <span class="box-sublabel">CORE POSITIONING</span>
+        </div>
+        <div class="meta-group">
+          <span class="meta-lbl">BRAND IDENTITY</span>
+          <div class="meta-val">Kaizen Software Agency</div>
+        </div>
+        <div class="meta-group">
+          <span class="meta-lbl">TAGLINE / MANIFESTO</span>
+          <div class="meta-val serif">“Ideas today, a better tomorrow. Software that drives real business.”</div>
+        </div>
+        <div class="meta-group">
+          <span class="meta-lbl">STUDIO HEADQUARTERS &amp; WEB</span>
+          <div class="meta-val" style="font-size: 10.5px;">Hyderabad, India · kaizen-software-agency.netlify.app</div>
+        </div>
+        <div class="meta-group">
+          <span class="meta-lbl">AGENCY CLASSIFICATION</span>
+          <div class="meta-val" style="font-size: 10.5px;">Bespoke Product Studio &amp; High-Craft Engineering</div>
+        </div>
+        <div class="meta-group">
+          <span class="meta-lbl">COMMERCIAL TRUST HIGHLIGHTS</span>
+          <ul class="highlight-list">
+            <li>Starter at ₹4,999</li>
+            <li>30% Advance Token</li>
+            <li>70% on Final Approval</li>
+            <li>15 Days Free Support</li>
+            <li>100% Code Ownership</li>
+            <li>Zen Particle Engine</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2. OFFICIAL LOGO (EMBLEM DISPLAY) -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">2.</span> OFFICIAL LOGO</div>
+          <span class="box-sublabel">EMBLEM DISPLAY</span>
+        </div>
+        <div class="logo-stage">
+          <div class="logo-stage-inner">
+            <!-- PURE VECTOR EMBLEM -->
+            <svg viewBox="0 0 120 120" style="width: 58px; height: 58px; filter: drop-shadow(0 0 14px rgba(0, 245, 255, 0.7));" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="emblemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00F5FF" />
+                  <stop offset="50%" stop-color="#00C8FF" />
+                  <stop offset="100%" stop-color="#0077FF" />
+                </linearGradient>
+              </defs>
+              <path d="M 22 15 L 42 15 L 42 105 L 22 105 Z" fill="#FFFFFF" />
+              <path d="M 22 56 L 88 15 L 105 15 L 38 67 Z" fill="url(#emblemGrad)" />
+              <path d="M 42 66 L 98 105 L 76 105 L 32 73 Z" fill="#FFFFFF" />
+            </svg>
+
+            <div class="logo-divider-v"></div>
+
+            <div class="wordmark-wrap">
+              <div class="wm-title">
+                <span>K</span><span class="lambda">Λ</span><span>IZEN</span>
+              </div>
+              <div class="wm-sub">SOFTWARE AGENCY</div>
+              <div class="wm-accent-bar"></div>
+              <div class="wm-tagline">IDEAS TODAY, A BETTER TOMORROW.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 6px; font-family: var(--font-mono); font-size: 8px; color: var(--text-subtle); text-align: center;">
+          Official Master Lockup: Geometric K + Cyan Lambda Glyphs + Editorial Monospace Rule.
+        </div>
+      </div>
+
+      <!-- 3. SYMBOL / MARK (SPLIT LOGO MECHANISM) -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">3.</span> SYMBOL / MARK</div>
+          <span class="box-sublabel">SPLIT LOGO MECHANISM</span>
+        </div>
+        <div class="logo-stage-dual">
+          <div class="mark-item">
+            <svg viewBox="0 0 120 120" style="width: 50px; height: 50px; filter: drop-shadow(0 0 12px rgba(0, 245, 255, 0.7));" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 22 15 L 42 15 L 42 105 L 22 105 Z" fill="#FFFFFF" />
+              <path d="M 22 56 L 88 15 L 105 15 L 38 67 Z" fill="url(#emblemGrad)" />
+              <path d="M 42 66 L 98 105 L 76 105 L 32 73 Z" fill="#FFFFFF" />
+            </svg>
+            <span class="mark-sub">K-Pillar Mark</span>
+          </div>
+
+          <div style="color: var(--cyan-core); font-family: var(--font-mono); font-size: 16px; opacity: 0.6;">+</div>
+
+          <div class="mark-item">
+            <div style="font-family: var(--font-sans); font-size: 38px; font-weight: 800; color: var(--cyan-core); text-shadow: 0 0 16px rgba(0, 245, 255, 0.85); line-height: 1;">
+              Λ
+            </div>
+            <span class="mark-sub">Lambda Apex</span>
+          </div>
+
+          <div style="color: var(--cyan-core); font-family: var(--font-mono); font-size: 16px; opacity: 0.6;">+</div>
+
+          <div class="mark-item">
+            <div class="seal-box-lg" style="width: 40px; height: 40px; font-size: 20px;">
+              改善
+            </div>
+            <span class="mark-sub">Continuous Impr.</span>
+          </div>
+        </div>
+        <div style="margin-top: 6px; font-family: var(--font-mono); font-size: 8px; color: var(--text-subtle); text-align: center;">
+          The K pillar and Lambda glyph scale modularly across favicon, UI cards, and loading states.
+        </div>
+      </div>
+
+      <!-- 4. STUDIO SEAL & ORIGIN -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">4.</span> STUDIO SEAL</div>
+          <span class="box-sublabel">PHILOSOPHY &amp; ORIGIN</span>
+        </div>
+        <div class="seal-stage">
+          <div class="seal-box-lg">改善</div>
+          <div class="seal-sub-caption">
+            <strong style="color: #FFFFFF; font-size: 9px; display: block; letter-spacing: 1.5px;">KAIZEN · 改善</strong>
+            "Continuous Improvement for the Better"<br>
+            Bespoke Digital Systems · Hyderabad, India
+          </div>
+        </div>
+        <div style="margin-top: 6px; font-family: var(--font-mono); font-size: 8px; color: var(--text-subtle); text-align: center;">
+          Autonomous commercial agency standard. Zero templates, zero slides, 100% production code.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== ROW 2: COLOR PALETTE (5) ==================== -->
+    <div class="grid-row row-middle">
+      
+      <!-- 5. COLOR PALETTE -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">5.</span> COLOR PALETTE</div>
+          <span class="box-sublabel">CLICK ANY SWATCH TO COPY HEX CODE</span>
+        </div>
+        
+        <div class="color-section-grid">
+          
+          <!-- PRIMARY / BASE -->
+          <div>
+            <span class="color-category-title">PRIMARY / BASE COLORS</span>
+            <div class="swatch-row">
+              <div class="swatch-card" onclick="copyHex('#06090E', 'Deep Obsidian')">
+                <div class="swatch-fill" style="background: #06090E;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Deep Obsidian</span>
+                  <span class="swatch-hex">#06090E</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#0B1019', 'Ink Slate')">
+                <div class="swatch-fill" style="background: #0B1019;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Ink Slate</span>
+                  <span class="swatch-hex">#0B1019</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#00F5FF', 'Cyan Core')">
+                <div class="swatch-fill" style="background: #00F5FF; box-shadow: inset 0 0 10px rgba(0,0,0,0.3);"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Cyan Core</span>
+                  <span class="swatch-hex">#00F5FF</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#0077FF', 'Cobalt Sky')">
+                <div class="swatch-fill" style="background: #0077FF;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Cobalt Sky</span>
+                  <span class="swatch-hex">#0077FF</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACCENT COLORS -->
+          <div>
+            <span class="color-category-title">ACCENT COLORS (GRADIENTS &amp; GLOW)</span>
+            <div class="swatch-row">
+              <div class="swatch-card" onclick="copyHex('#00C8FF', 'Electric Azure')">
+                <div class="swatch-fill" style="background: #00C8FF;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Electric Azure</span>
+                  <span class="swatch-hex">#00C8FF</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#38BDF8', 'Sakura Blue')">
+                <div class="swatch-fill" style="background: #38BDF8;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Sakura Blue</span>
+                  <span class="swatch-hex">#38BDF8</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#0052CC', 'Sapphire Deep')">
+                <div class="swatch-fill" style="background: #0052CC;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Sapphire Deep</span>
+                  <span class="swatch-hex">#0052CC</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#10B981', 'Zen Emerald')">
+                <div class="swatch-fill" style="background: #10B981;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Zen Emerald</span>
+                  <span class="swatch-hex">#10B981</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#E0F2FE', 'Frosted Mist')">
+                <div class="swatch-fill" style="background: #E0F2FE;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Frosted Mist</span>
+                  <span class="swatch-hex">#E0F2FE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEUTRAL COLORS -->
+          <div>
+            <span class="color-category-title">NEUTRAL COLORS (TEXT / SURFACES)</span>
+            <div class="swatch-row">
+              <div class="swatch-card" onclick="copyHex('#FFFFFF', 'Pure White')">
+                <div class="swatch-fill" style="background: #FFFFFF;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Pure White</span>
+                  <span class="swatch-hex">#FFFFFF</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#F0FDFE', 'Ice Paper')">
+                <div class="swatch-fill" style="background: #F0FDFE;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Ice Paper</span>
+                  <span class="swatch-hex">#F0FDFE</span>
+                </div>
+              </div>
+              <div class="swatch-card" onclick="copyHex('#64748B', 'Muted Slate')">
+                <div class="swatch-fill" style="background: #64748B;"></div>
+                <div class="swatch-meta">
+                  <span class="swatch-name">Muted Slate</span>
+                  <span class="swatch-hex">#64748B</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ==================== ROW 3: LOWER ROW (6, 7, 8) ==================== -->
+    <div class="grid-row row-lower">
+      
+      <!-- 6. TYPOGRAPHY -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">6.</span> TYPOGRAPHY</div>
+          <span class="box-sublabel">EXACT HIERARCHY STANDARD</span>
+        </div>
+        
+        <div class="type-specimen">
+          <div class="type-label">
+            <span>PRIMARY FONT · HEADINGS</span>
+            <span>NEWSREADER / CINZEL</span>
+          </div>
+          <div class="type-demo-primary">
+            Turn ideas into <span>software</span> that drives business.
+          </div>
+        </div>
+
+        <div class="type-specimen">
+          <div class="type-label">
+            <span>SECONDARY FONT · SUBHEADS</span>
+            <span>JETBRAINS MONO / CONSOLAS</span>
+          </div>
+          <div class="type-demo-sec">
+            BESPOKE DIGITAL SYSTEMS · HYDERABAD
+          </div>
+        </div>
+
+        <div class="type-specimen">
+          <div class="type-label">
+            <span>BODY TEXT FONT</span>
+            <span>INTER / PLUS JAKARTA</span>
+          </div>
+          <div class="type-demo-body">
+            Custom-built for growing businesses, clinics, cafes, salons, and ambitious founders. Engineered 100% around your actual workflow with zero bloated templates.
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. VISUAL ELEMENTS & TEXTURES -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">7.</span> VISUAL ELEMENTS &amp; TEXTURES</div>
+          <span class="box-sublabel">CORE GRAPHIC PATTERNS</span>
+        </div>
+        <div class="textures-grid">
+          <div class="texture-box texture-particles">
+            <span class="texture-caption">AZURE SAKURA</span>
+            <span class="texture-desc">Falling blossom petals</span>
+          </div>
+          <div class="texture-box texture-spotlight">
+            <span class="texture-caption">RADIAL BLOOM</span>
+            <span class="texture-desc">Backdrop aura #00F5FF</span>
+          </div>
+          <div class="texture-box texture-blueprint">
+            <span class="texture-caption">PRECISION GRID</span>
+            <span class="texture-desc">24px blueprint matrix</span>
+          </div>
+        </div>
+        <div style="margin-top: 8px; font-family: var(--font-mono); font-size: 8px; color: var(--text-muted);">
+          Pair subtle 24px blueprint dot matrices with cool cyan Gaussian glows (blur: 100-140px) and falling sakura petals. Avoid noisy, chaotic particle swarms.
+        </div>
+      </div>
+
+      <!-- 8. ICON STYLE REFERENCE -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">8.</span> ICON STYLE REFERENCE</div>
+          <span class="box-sublabel">MINIMAL MONOCHROME LINE ICONS</span>
+        </div>
+        <div class="icons-grid">
+          <div class="icon-cell">
+            <div class="icon-symbol">🌐</div>
+            <div class="icon-title">WEB SYSTEMS</div>
+            <div class="icon-sub">HIGH-CONVERT</div>
+          </div>
+          <div class="icon-cell">
+            <div class="icon-symbol">📱</div>
+            <div class="icon-title">CLIENT APPS</div>
+            <div class="icon-sub">BESPOKE WORKFLOW</div>
+          </div>
+          <div class="icon-cell">
+            <div class="icon-symbol">☕</div>
+            <div class="icon-title">QR DINING</div>
+            <div class="icon-sub">SMART MENUS</div>
+          </div>
+          <div class="icon-cell">
+            <div class="icon-symbol">📅</div>
+            <div class="icon-title">BOOKING</div>
+            <div class="icon-sub">CLINIC / SALON</div>
+          </div>
+          <div class="icon-cell">
+            <div class="icon-symbol">⚡</div>
+            <div class="icon-title">RAPID MVP</div>
+            <div class="icon-sub">10-DAY SHIP</div>
+          </div>
+          <div class="icon-cell">
+            <div class="icon-symbol">🛡️</div>
+            <div class="icon-title">OWNERSHIP</div>
+            <div class="icon-sub">100% CODEBASE</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== ROW 4: BOTTOM ROW (9, 10, 11, 12) ==================== -->
+    <div class="grid-row row-bottom">
+      
+      <!-- 9. POSTER / HERO REFERENCE -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">9.</span> HERO REFERENCE</div>
+          <span class="box-sublabel">OFFICIAL HERO ART</span>
+        </div>
+        <div class="poster-miniature">
+          <div class="poster-badge-row">
+            <span class="poster-badge">HERO KEY ART</span>
+            <span class="poster-badge">EDITION 01 · 2026</span>
+          </div>
+          <div class="poster-badge-row" style="margin-top: auto;">
+            <span style="font-family: var(--font-mono); font-size: 7.5px; color: var(--cyan-core); font-weight: 700; letter-spacing: 0.5px;">kaizen-software-agency.netlify.app</span>
+            <span style="font-family: var(--font-mono); font-size: 7.5px; color: var(--paper);">HYDERABAD · INDIA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. COMMERCIAL & DELIVERY SPECS -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">10.</span> DELIVERY SPECS</div>
+          <span class="box-sublabel">PRICING &amp; CADENCE</span>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 9.5px; line-height: 1.5; color: var(--text-muted);">
+          <div style="color: #FFFFFF; font-weight: 700; margin-bottom: 2px;">COMMERCIAL MODEL:</div>
+          <div>₹4,999 · Starter Packages</div>
+          <div>30% Advance · 70% Upon Approval</div>
+          <div>15 Days · Free Post-Launch Support</div>
+          <div>2 Iteration Cycles · Zero Hidden Costs</div>
+          <div style="color: var(--cyan-core); margin-top: 3px;">STACK: React 19, TypeScript, Tailwind v4</div>
+        </div>
+      </div>
+
+      <!-- 11. DESIGN TONE & MOOD -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">11.</span> DESIGN TONE &amp; MOOD</div>
+        </div>
+        <div class="tone-pills-wrap">
+          <span class="tone-pill active">Minimalist</span>
+          <span class="tone-pill active">Zen Luxury</span>
+          <span class="tone-pill active">Electric Cyan</span>
+          <span class="tone-pill">Obsidian Ink</span>
+          <span class="tone-pill active">Editorial Serif</span>
+          <span class="tone-pill">Outcome-Driven</span>
+          <span class="tone-pill active">Zero Bloat</span>
+          <span class="tone-pill">High Craft</span>
+        </div>
+      </div>
+
+      <!-- 12. KEY MESSAGING -->
+      <div class="box-card">
+        <div class="box-header">
+          <div class="box-num-title"><span class="num">12.</span> KEY MESSAGING</div>
+          <span class="box-sublabel">CORE PHRASING</span>
+        </div>
+        <div class="messaging-list">
+          <div class="message-item">“Ideas today, a <em>better tomorrow</em>.”</div>
+          <div class="message-item">“Turn your idea into software that <em>drives real business</em>.”</div>
+          <div class="message-item">“Pay 30% advance. The remaining 70% <em>only after approval</em>.”</div>
+          <div class="message-item" style="font-size: 9px; font-family: var(--font-mono);">kaizen-software-agency.netlify.app · Hyderabad, India</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="copy-toast" id="copyToast">Hex Code Copied!</div>
+
+  <script>
+    function copyHex(hex, name) {
+      navigator.clipboard.writeText(hex).then(() => {
+        const toast = document.getElementById('copyToast');
+        toast.textContent = `Copied ${name}: ${hex}`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+      });
+    }
+  </script>
+
+</body>
+</html>

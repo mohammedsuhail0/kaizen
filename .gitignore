@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies and build
+node_modules
+dist
+dist-ssr
+*.local
+.netlify
+.vercel
+
+# Python & RAG backend
+groq-agentic-rag/venv/
+groq-agentic-rag/.env
+groq-agentic-rag/**/__pycache__/
+groq-agentic-rag/.pytest_cache/
+groq-agentic-rag/data/chroma_db/
+**/__pycache__/
+*.pyc
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary scratch
+scratch/

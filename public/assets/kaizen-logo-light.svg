@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 120" width="540" height="120">
+  <defs>
+    <linearGradient id="logoLightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0077FF"/>
+      <stop offset="50%" stop-color="#0099FF"/>
+      <stop offset="100%" stop-color="#0055DD"/>
+    </linearGradient>
+  </defs>
+
+  <!-- K Icon -->
+  <g transform="translate(10, 0)">
+    <path d="M 22 15 L 42 15 L 42 105 L 22 105 Z" fill="#0A0F1D"/>
+    <path d="M 22 56 L 88 15 L 105 15 L 38 67 Z" fill="url(#logoLightGrad)"/>
+    <path d="M 42 66 L 98 105 L 76 105 L 32 73 Z" fill="#0A0F1D"/>
+  </g>
+
+  <!-- Vertical Divider -->
+  <line x1="145" y1="20" x2="145" y2="100" stroke="#0077FF" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Wordmark -->
+  <g transform="translate(170, 0)">
+    <text x="0" y="55" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="42" letter-spacing="8" fill="#0A0F1D">K</text>
+    <text x="36" y="55" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="42" letter-spacing="8" fill="url(#logoLightGrad)">Λ</text>
+    <text x="74" y="55" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="42" letter-spacing="8" fill="#0A0F1D">IZEN</text>
+
+    <!-- Subtitle -->
+    <text x="2" y="76" font-family="'JetBrains Mono', Consolas, monospace" font-weight="700" font-size="12" letter-spacing="5" fill="#334155">SOFTWARE AGENCY</text>
+
+    <!-- Accent Rule -->
+    <line x1="2" y1="86" x2="260" y2="86" stroke="#0077FF" stroke-width="1.5"/>
+
+    <!-- Tagline -->
+    <text x="2" y="99" font-family="'JetBrains Mono', Consolas, monospace" font-weight="600" font-size="9" letter-spacing="3" fill="#64748B">IDEAS TODAY, A BETTER TOMORROW.</text>
+  </g>
+</svg>

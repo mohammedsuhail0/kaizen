@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kaizen-software-agency.netlify.app/sitemap.xml
