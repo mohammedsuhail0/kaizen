@@ -13,6 +13,7 @@ import {
   FileText,
 } from 'lucide-react';
 import { getWhatsAppUrl, handleWhatsAppInstantClick } from '../data/agencyData';
+import { GROQ_API_KEY, KAIZEN_SYSTEM_PROMPT } from '../data/aiConsultantPrompt';
 
 interface Message {
   id: string;
@@ -126,18 +127,71 @@ export const AgenticChatModal: React.FC<AgenticChatModalProps> = ({
         .slice(-6)
         .map((m) => ({ role: m.role, content: m.content }));
 
-      const response = await fetch('http://localhost:8000/api/v1/chat/stream', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: textToSend,
-          history: historyPayload,
-        }),
-        signal: abortController.signal,
-      });
+      let response: Response | null = null;
 
-      if (!response.ok) {
-        throw new Error(`Server returned status ${response.status}`);
+      // 1. First attempt: call Vercel Serverless Endpoint /api/chat (HTTPS, same-origin)
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: textToSend, history: historyPayload }),
+          signal: abortController.signal,
+        });
+        if (res.ok) {
+          response = res;
+        }
+      } catch (e) {
+        if (e instanceof Error && e.name === 'AbortError') throw e;
+      }
+
+      // 2. Localhost fallback: if developing locally on port 8000
+      if (!response && typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        try {
+          const res = await fetch('http://localhost:8000/api/v1/chat/stream', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: textToSend, history: historyPayload }),
+            signal: abortController.signal,
+          });
+          if (res.ok) {
+            response = res;
+          }
+        } catch (e) {
+          if (e instanceof Error && e.name === 'AbortError') throw e;
+        }
+      }
+
+      // 3. Direct Groq API fallback (guaranteed to work from any browser worldwide via CORS)
+      if (!response) {
+        setActiveThought('Thinking...');
+        const groqMessages = [
+          { role: 'system', content: KAIZEN_SYSTEM_PROMPT },
+          ...historyPayload.map((m) => ({
+            role: m.role === 'assistant' ? 'assistant' : 'user',
+            content: m.content,
+          })),
+          { role: 'user', content: textToSend },
+        ];
+
+        response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${GROQ_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'openai/gpt-oss-120b',
+            messages: groqMessages,
+            temperature: 0.1,
+            stream: true,
+            max_tokens: 1500,
+          }),
+          signal: abortController.signal,
+        });
+      }
+
+      if (!response || !response.ok) {
+        throw new Error(`Chat service error: ${response?.statusText || 'Unable to connect'}`);
       }
 
       const reader = response.body?.getReader();
@@ -146,8 +200,6 @@ export const AgenticChatModal: React.FC<AgenticChatModalProps> = ({
       const decoder = new TextDecoder('utf-8');
       let buffer = '';
       let accumulatedContent = '';
-      let currentThought = '';
-      let currentToolCall: { tool: string; args: Record<string, unknown> } | undefined;
 
       while (true) {
         const { value, done } = await reader.read();
@@ -160,6 +212,7 @@ export const AgenticChatModal: React.FC<AgenticChatModalProps> = ({
         for (const line of lines) {
           const trimmed = line.trim();
           if (!trimmed.startsWith('data: ')) continue;
+          if (trimmed === 'data: [DONE]') continue;
 
           const jsonStr = trimmed.replace('data: ', '').trim();
           if (!jsonStr) continue;
@@ -167,34 +220,36 @@ export const AgenticChatModal: React.FC<AgenticChatModalProps> = ({
           try {
             const event = JSON.parse(jsonStr);
 
-            if (event.type === 'thought' || event.type === 'tool_call' || event.type === 'tool_result') {
-              setActiveThought('Thinking...');
-            } else if (event.type === 'token') {
+            // Handle standard Groq delta chunks
+            if (event.choices?.[0]?.delta) {
+              const delta = event.choices[0].delta;
+              if (delta.content) {
+                accumulatedContent += delta.content;
+                setActiveThought('');
+                setMessages((prev) =>
+                  prev.map((msg) =>
+                    msg.id === assistantMsgId
+                      ? { ...msg, content: accumulatedContent, isStreaming: true }
+                      : msg
+                  )
+                );
+              } else if (delta.reasoning) {
+                setActiveThought('Thinking...');
+              }
+            }
+            // Handle custom SSE events
+            else if (event.type === 'token') {
               accumulatedContent += event.content || '';
               setActiveThought('');
-
               setMessages((prev) =>
                 prev.map((msg) =>
                   msg.id === assistantMsgId
-                    ? {
-                        ...msg,
-                        content: accumulatedContent,
-                        thought: currentThought,
-                        toolCall: currentToolCall,
-                        isStreaming: true,
-                      }
+                    ? { ...msg, content: accumulatedContent, isStreaming: true }
                     : msg
                 )
               );
-            } else if (event.type === 'error') {
-              accumulatedContent += `\n\n*(Notice: ${event.content})*`;
-              setMessages((prev) =>
-                prev.map((msg) =>
-                  msg.id === assistantMsgId
-                    ? { ...msg, content: accumulatedContent, isStreaming: false }
-                    : msg
-                )
-              );
+            } else if (event.type === 'thought' || event.type === 'tool_call') {
+              setActiveThought('Thinking...');
             } else if (event.type === 'done') {
               setIsStreaming(false);
               setActiveThought('');
