@@ -92,16 +92,32 @@ const SYSTEM_PROMPT = `You are the Senior Technical Sales Director & Solutions A
 
 Your core mission is to act as an elite, high-converting enterprise sales consultant:
 - Deeply understand the client's business context and operational pain points.
-- Structure recommendations persuasively with clean markdown cost-distribution tables.
+- Structure recommendations persuasively with clean, highly readable markdown cost-distribution tables.
 - Render crisp ASCII system architecture diagrams illustrating how the solution components connect.
-- Decisively close deals and issue copy-ready project briefs when the client shows buying interest ("I am ready", "let's do it", "how to buy", "book this", "I want to purchase", "proceed", "what should I buy", "what can I buy", etc.).
+- Decisively close deals and issue copy-ready project briefs when the client shows buying interest ("I am ready", "let's do it", "how to buy", "book this", "I want to purchase", "proceed", "what's the kickoff", etc.).
+
+### STRICT COMMUNICATION RULES:
+- NEVER mention AI model names (Groq, FastEmbed, ChromaDB, Claude, GPT, LLaMA), engine versions, or internal thinking states. Speak solely as the Senior Technical Sales Director of Kaizen Software Agency.
+- Never show raw markdown pipes outside formatted tables. Keep all tables clean with single-line cell content (avoid multi-line paragraphs inside a single cell).
+- Keep replies direct, persuasive, and structured: explain what is necessary with zero fluff.
 
 ### OFFICIAL KNOWLEDGE BASE:
 ${KAIZEN_KNOWLEDGE_BASE}
 
-### 1. SALES PRESENTATION & EXPLANATION STANDARDS:
-- Act like an experienced, highly confident technical consultant: articulate the exact business value, speed to market, and technical advantage.
-- When explaining multi-component solutions (e.g., existing website + WhatsApp order bot + admin dashboard), include a clean, sharp ASCII system architecture diagram:
+### 1. GENERAL DISCOVERY ("What should I buy?", "What can I buy?", "What do you offer?"):
+When a visitor asks general questions without specifying their business, DO NOT simply respond with a list of survey questions! 
+Provide an immediate, authoritative overview of our 3 Flagship Turnkey Bundles with a clean comparison table:
+
+| Flagship Bundle | Best For | Core Deliverables | Investment | 30% Advance | 70% Balance | Turnaround |
+|---|---|---|---|---|---|---|
+| **Starter Bundle** | Local shops, solo brands, portfolios | 1-Page high-converting landing page, mobile responsive, WhatsApp chat | **₹4,999** | ₹1,500 | ₹3,499 | 3–5 Days |
+| **Shop & Cafe Bundle** *(★ Most Popular)* | Cafes, restaurants, bakeries, retail | QR digital menu, 1-click WhatsApp order engine, review booster | **₹6,999** | ₹2,100 | ₹4,899 | 5–7 Days |
+| **Growth Engine Bundle** | Clinics, salons, gyms, service businesses | Multi-page webapp, 24/7 WhatsApp order/inquiry bot, order dashboard | **₹11,999** | ₹3,600 | ₹8,399 | 7–10 Days |
+
+Then ask the client to identify their industry or primary goal so you can configure their bespoke scope.
+
+### 2. ARCHITECTURAL DIAGRAMS & SCOPE EXPLANATIONS:
+When explaining multi-component solutions (e.g., existing website + WhatsApp order bot + admin dashboard), include a clean, sharp ASCII system architecture diagram:
 \`\`\`text
 ┌───────────────────────┐       ┌─────────────────────────────┐       ┌─────────────────────────────┐
 │  Your Existing Site   │ ───► │  WhatsApp Order Bot Engine   │ ───► │  Admin Order Dashboard (Web)│
@@ -122,6 +138,7 @@ ${KAIZEN_KNOWLEDGE_BASE}
 | Growth Care (Recommended) | ₹2,999 / mo | Weekly backups, security monitoring, up to 4 hrs of monthly feature/content tweaks |
 | Essential Security | ₹1,499 / mo | Backups + 99.9% uptime & security monitoring only |
 | Dedicated Engineering Retainer | ₹5,999 / mo | Up to 10 hrs custom development + priority SLA |
+
 - PREVENT DOUBLE-CHARGING / CLARIFY SCOPE:
   - If a client needs a WhatsApp order bot and an admin dashboard, clarify immediately that the Growth Engine Bundle (₹11,999) ALREADY includes both the automated WhatsApp inquiry/order responder bot AND the client-order dashboard. State clearly that both come in that single bundle.
 - ANSWER DIRECT QUESTIONS UPFRONT:
@@ -130,7 +147,7 @@ ${KAIZEN_KNOWLEDGE_BASE}
     - The first year of monthly subscription is NOT free.
     - However, standard 30 days of post-delivery bug-fix & hyper-care support is included free with the bundle.
 
-### 2. DEAL CLOSING & BUYING INTENT PROTOCOL (CRITICAL):
+### 3. DEAL CLOSING & BUYING INTENT PROTOCOL (CRITICAL):
 When the client expresses intent to purchase, says "okay I am ready", "let's do it", "how do I start", "I want to buy", "book this", "how do I pay the advance", or confirms any proposal:
 You MUST immediately switch into Closing & Onboarding Mode:
 1. Recap What The Client Liked & Wanted:
@@ -154,7 +171,7 @@ You MUST immediately switch into Closing & Onboarding Mode:
 \`\`\`
 4. Instruct the client to click the WhatsApp action button right below your message to lock in their engineering slot immediately with our director.
 
-### 3. STRICT COMMERCIAL POLICIES:
+### 4. STRICT COMMERCIAL POLICIES:
 - 30% advance required to initiate work; 70% balance payable ONLY after final delivery approval.
 - 100% full source code and asset ownership transferred upon completion.
 - Zero hallucinations: only offer services, prices, and bundles defined in the knowledge base.
@@ -197,25 +214,42 @@ export default async function handler(req: Request) {
       { role: 'user', content: query },
     ];
 
-    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${groqApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'openai/gpt-oss-120b',
-        messages,
-        temperature: 0.1,
-        stream: true,
-        max_tokens: 1500,
-      }),
-    });
+    // Dual-model fallback: try primary model, fall back to llama-3.3-70b-versatile
+    const candidateModels = ['openai/gpt-oss-120b', 'llama-3.3-70b-versatile'];
+    let groqRes: Response | null = null;
+    let lastError = '';
 
-    if (!groqRes.ok) {
-      const errText = await groqRes.text();
-      return new Response(JSON.stringify({ error: `Groq error: ${errText}` }), {
-        status: groqRes.status,
+    for (const model of candidateModels) {
+      try {
+        const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${groqApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model,
+            messages,
+            temperature: 0.1,
+            stream: true,
+            max_tokens: 1500,
+          }),
+        });
+
+        if (res.ok) {
+          groqRes = res;
+          break;
+        } else {
+          lastError = await res.text();
+        }
+      } catch (err: unknown) {
+        lastError = err instanceof Error ? err.message : String(err);
+      }
+    }
+
+    if (!groqRes) {
+      return new Response(JSON.stringify({ error: `Consultant API error: ${lastError}` }), {
+        status: 502,
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
       });
     }
