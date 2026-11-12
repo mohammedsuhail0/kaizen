@@ -267,8 +267,8 @@ export const AgenticChatModal: React.FC<AgenticChatModalProps> = ({
           { role: 'user', content: textToSend },
         ];
 
-        // Dual model fallback for maximum resilience
-        const clientModels = ['llama-3.3-70b-versatile', 'openai/gpt-oss-120b'];
+        // Multi-model fallback with active, high-quota models
+        const clientModels = ['openai/gpt-oss-20b', 'qwen/qwen3.8-27b', 'openai/gpt-oss-120b'];
         for (const model of clientModels) {
           try {
             const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
