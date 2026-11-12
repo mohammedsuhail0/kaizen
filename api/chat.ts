@@ -220,14 +220,16 @@ export default async function handler(req: Request) {
 
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
+    let streamBuffer = '';
 
     const transformStream = new TransformStream({
       start(controller) {
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'thought', content: 'Thinking...' })}\n\n`));
       },
       transform(chunk, controller) {
-        const text = decoder.decode(chunk, { stream: true });
-        const lines = text.split('\n');
+        streamBuffer += decoder.decode(chunk, { stream: true });
+        const lines = streamBuffer.split('\n');
+        streamBuffer = lines.pop() || '';
 
         for (const line of lines) {
           const trimmed = line.trim();
@@ -246,9 +248,25 @@ export default async function handler(req: Request) {
               );
             }
           } catch {
-            // Ignore parse errors from partial chunk splits
+            // Ignore parse errors
           }
         }
+      },
+      flush(controller) {
+        if (streamBuffer.trim().startsWith('data: ') && streamBuffer.trim() !== 'data: [DONE]') {
+          try {
+            const parsed = JSON.parse(streamBuffer.trim().slice(6));
+            const delta = parsed.choices?.[0]?.delta;
+            if (delta?.content) {
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ type: 'token', content: delta.content })}\n\n`)
+              );
+            }
+          } catch {
+            // ignore
+          }
+        }
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'done' })}\n\n`));
       },
     });
 
