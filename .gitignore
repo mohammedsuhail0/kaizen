@@ -37,3 +37,4 @@ groq-agentic-rag/data/chroma_db/
 
 # Temporary scratch
 scratch/
+.vercel
