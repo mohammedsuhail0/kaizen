@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { Sparkles } from 'lucide-react';
 import { KaizenLogo } from './KaizenLogo';
 
 interface VideoEngineProps {
@@ -98,7 +97,7 @@ export const VideoEngine: React.FC<VideoEngineProps> = ({
           />
         )}
 
-        {/* Layer 3 (Preloader Logo): Centered High-Contrast Kaizen Logo over Blue Tree Video (Zero Progress Bar) */}
+        {/* Layer 3 (Preloader Logo): Centered High-Contrast Kaizen Logo over Blue Tree Video */}
         {!blueGone && (
           <div
             className={`absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none transition-all duration-700 ease-out px-4 ${
@@ -110,19 +109,6 @@ export const VideoEngine: React.FC<VideoEngineProps> = ({
               <KaizenLogo size="hero" showTagline={true} theme="dark" />
             </div>
           </div>
-        )}
-
-        {/* Ambient Preloader Skip Pill */}
-        {isPreloading && !blueFading && (
-          <button
-            onClick={handleSkip}
-            className="absolute bottom-6 right-6 z-30 flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 hover:bg-black/85 backdrop-blur-xl border border-cyan-400/40 text-cyan-200 hover:text-white text-xs font-mono tracking-widest transition-all cursor-pointer pointer-events-auto active:scale-95 shadow-[0_4px_20px_rgba(0,0,0,0.5),0_0_15px_rgba(0,245,255,0.2)]"
-            title="Skip Intro"
-            aria-label="Skip Intro"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
-            <span>TAP TO ENTER →</span>
-          </button>
         )}
 
         {/* Desktop Scrim */}
