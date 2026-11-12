@@ -411,7 +411,7 @@ export const AgenticChatModal: React.FC<AgenticChatModalProps> = ({
                           msg.content.toLowerCase().includes('ready to initiate') ||
                           msg.content.toLowerCase().includes('ready to proceed') ||
                           msg.content.toLowerCase().includes('lock in');
-                        const waText = buildWhatsAppHandoffMessage(msg.content);
+                        const waText = buildWhatsAppHandoffMessage(msg.content, messages);
 
                         return (
                           <a
@@ -556,49 +556,99 @@ export const AgenticChatModal: React.FC<AgenticChatModalProps> = ({
 
 /**
  * Generates an executive, highly structured WhatsApp handoff dispatch message.
- * Extracts project briefs, pricing agreements, or consultation recaps into clean,
- * copy-ready bullet points without raw markdown pipe syntax.
+ * Explicitly states what the client wanted, what they liked in the proposal,
+ * and the exact agreed pricing, 30% advance, and turnaround terms.
  */
-function buildWhatsAppHandoffMessage(content: string): string {
+function buildWhatsAppHandoffMessage(content: string, allMessages?: Message[]): string {
   if (!content) return '';
+
+  // Extract what client asked for from conversation history
+  let clientWanted = '';
+  if (allMessages && allMessages.length > 0) {
+    const userMsgs = allMessages
+      .filter((m) => m.role === 'user')
+      .map((m) => m.content.trim())
+      .filter((text) => {
+        const lower = text.toLowerCase();
+        return !['ok', 'okay', 'ready', 'yes', "let's do it", 'lets do it', 'deal', 'lock in', 'i am ready', "i'm ready"].includes(lower);
+      });
+
+    if (userMsgs.length > 0) {
+      clientWanted = userMsgs[0];
+    }
+  }
 
   // 1. Check if there is an explicit copy-ready brief block
   const briefMatch = content.match(/🚀\s*OFFICIAL PROJECT BRIEF[\s\S]*?(?=```|$)/i);
   if (briefMatch) {
     const briefClean = briefMatch[0].trim();
-    return `Hi Kaizen Team! I spoke with your AI Technical Consultant on your website and I am ready to initiate my project:\n\n${briefClean}\n\nPlease share the invoice & 30% advance link so we can secure the engineering queue!`;
+    let intro = 'Hi Kaizen Team! I spoke with your AI Consultant on your website and I am ready to initiate my project:\n\n';
+
+    if (clientWanted && !briefClean.toLowerCase().includes('what you wanted') && !briefClean.toLowerCase().includes('what i wanted')) {
+      intro += `🎯 What I Wanted & Needed:\n• ${clientWanted.slice(0, 220)}\n\n`;
+    }
+
+    return `${intro}${briefClean}\n\nI am ready to proceed! Please share the invoice & 30% advance link so we can secure the engineering queue!`;
   }
 
-  // 2. Check for key pricing or bundle mentions
+  // 2. Parse package, what was liked, and pricing details from the message
   const lines = content.split('\n');
-  const summaryBullets: string[] = [];
+  let selectedPackage = 'Custom Turnkey Solution';
+  let advanceAmount = '';
+  let balanceAmount = '';
+  let turnaround = '';
+  const featuresLiked: string[] = [];
 
   for (const line of lines) {
     const t = line.trim();
+    const lower = t.toLowerCase();
+
+    if (lower.includes('growth engine')) selectedPackage = 'Growth Engine Bundle (₹11,999)';
+    else if (lower.includes('shop & cafe') || lower.includes('shop and cafe')) selectedPackage = 'Shop & Cafe Bundle (₹6,999)';
+    else if (lower.includes('starter bundle')) selectedPackage = 'Starter Bundle (₹4,999)';
+
+    if (t.includes('₹') && lower.includes('advance')) {
+      advanceAmount = t.replace(/[\*\_\|]/g, '').trim();
+    }
+    if (t.includes('₹') && lower.includes('balance')) {
+      balanceAmount = t.replace(/[\*\_\|]/g, '').trim();
+    }
+    if (lower.includes('turnaround') || lower.includes('business days')) {
+      turnaround = t.replace(/[\*\_\|]/g, '').trim();
+    }
     if (
-      (t.includes('₹') || t.toLowerCase().includes('bundle') || t.toLowerCase().includes('advance') || t.toLowerCase().includes('turnaround')) &&
-      !t.startsWith('|') &&
-      !t.startsWith('#')
+      (t.startsWith('•') || t.startsWith('-') || t.startsWith('*')) &&
+      (lower.includes('bot') ||
+        lower.includes('dashboard') ||
+        lower.includes('menu') ||
+        lower.includes('portal') ||
+        lower.includes('ownership') ||
+        lower.includes('page') ||
+        lower.includes('app'))
     ) {
-      summaryBullets.push(t.replace(/[\*\#]/g, '').trim());
-      if (summaryBullets.length >= 4) break;
+      if (featuresLiked.length < 3) {
+        featuresLiked.push(t.replace(/^[\*\-•]\s*/, '').replace(/[\*\_]/g, '').trim());
+      }
     }
   }
 
-  if (summaryBullets.length > 0) {
-    return `Hi Kaizen Team! I received this proposal from your AI Consultant on your website:\n\n${summaryBullets.join('\n')}\n\nI would like to proceed with this scope. Could you share the next steps and 30% advance details?`;
+  let msg = `Hi Kaizen Team! I reviewed the proposal from your AI Solutions Architect on your website and I am ready to lock this in:\n\n`;
+
+  if (clientWanted) {
+    msg += `🎯 What I Wanted & Needed:\n• ${clientWanted.slice(0, 220)}\n\n`;
   }
 
-  // 3. Fallback clean snippet
-  const cleanSnippet = content
-    .replace(/\[Source:[^\]]+\]/g, '')
-    .replace(/\|[^\n]+\|/g, '')
-    .replace(/[\#\*\_`]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 300);
+  if (featuresLiked.length > 0) {
+    msg += `⭐ What I Liked in Your Solution:\n${featuresLiked.map((f) => `• ${f}`).join('\n')}\n\n`;
+  }
 
-  return `Hi Kaizen Team! I was chatting with your AI Consultant regarding:\n"${cleanSnippet}..."\n\nCould we connect to discuss finalizing the project scope and kickoff?`;
+  msg += `💰 Agreed Package & Commercials:\n• Selected Package: ${selectedPackage}\n`;
+  if (advanceAmount) msg += `• 30% Advance: ${advanceAmount}\n`;
+  if (balanceAmount) msg += `• 70% Balance: ${balanceAmount}\n`;
+  if (turnaround) msg += `• Timeline: ${turnaround}\n`;
+
+  msg += `\nPlease share the invoice and advance payment link so we can initiate development immediately!`;
+  return msg;
 }
 
 /**
