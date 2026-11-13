@@ -208,11 +208,11 @@ export const MobileView: React.FC<MobileViewProps> = ({ initialSection = 'hero',
             <button
               onClick={onOpenChat}
               className="touch-target flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-neutral-200 text-xs font-mono tracking-wider active:scale-95 transition-transform backdrop-blur-md cursor-pointer"
-              title="Open Kaizen Concierge"
-              aria-label="Open Kaizen Concierge"
+              title="Need Help? Ask Us"
+              aria-label="Need Help? Ask Us"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-soft-breath shrink-0" />
-              <span>Concierge</span>
+              <span>Need Help?</span>
             </button>
           ) : (
             <a

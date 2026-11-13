@@ -131,14 +131,14 @@ export function App() {
           </div>
         </main>
 
-        {/* Floating Zen Studio Concierge Pill Launcher & Teaser Note */}
+        {/* Floating Help & Pricing Launcher & Teaser Note */}
         <ChatLauncher
           onOpenChat={() => setIsChatOpen(true)}
           isOpen={isChatOpen}
         />
       </div>
 
-      {/* 4. Global Kaizen Solutions Architect Drawer (Zen Twilight Ink Theme) */}
+      {/* 4. Global Kaizen Project & Pricing Help Drawer */}
       <ChatDrawer
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}

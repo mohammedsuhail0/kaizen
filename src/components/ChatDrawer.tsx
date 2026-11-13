@@ -44,12 +44,12 @@ const QUICK_INQUIRIES = [
       'What package do you recommend for a cafe / restaurant with digital QR menu and WhatsApp direct ordering?',
   },
   {
-    label: '🏥 Clinic & Healthcare (₹8,999)',
+    label: '🏥 Clinic & Doctor (₹8,999)',
     query:
       'I run a dental / medical clinic. What are the deliverables and pricing for an online appointment booking system and patient triage?',
   },
   {
-    label: '🚀 Starter Landing Page (₹4,999)',
+    label: '🚀 Starter Website (₹4,999)',
     query:
       'What is included in the ₹4,999 Starter Bundle, turnaround timeline, and 30/70 payment terms?',
   },
@@ -59,9 +59,9 @@ const QUICK_INQUIRIES = [
       'What system do you have for a gym with membership tracking and fee dues?',
   },
   {
-    label: '⚡ Custom Engineering Scope',
+    label: '💡 Custom Idea / Other Project',
     query:
-      'What is your custom software engineering process, sprint kickoff timeline, and 30/70 milestone policy?',
+      'I have a custom project idea for my business. How does your development process and 30% advance / 70% on approval guarantee work?',
   },
 ];
 
@@ -75,7 +75,14 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({
       id: 'welcome',
       role: 'assistant',
       content:
-        '**Welcome to Kaizen Solutions.**\n\nI am your **Senior Solutions Architect**, directly integrated with our official engineering and pricing catalog.\n\nExplore our turnkey commercial packages, delivery turnarounds, and custom software architectures. Tell me about your business or operational requirements, and I will formulate a clear, itemized proposal with exact 30/70 commercial terms.',
+        "👋 **Hi! How can we help you today?**\n\n" +
+        "Whether you need a new website, an online store, a WhatsApp ordering bot, or just want to check pricing for your project — we're here to help!\n\n" +
+        "**Common questions we answer instantly:**\n" +
+        "• *\"How much will a website cost for my business?\"*\n" +
+        "• *\"Which package is best for what I need?\"*\n" +
+        "• *\"How long does delivery take?\"*\n" +
+        "• *\"How does the 30% advance & 70% on approval guarantee work?\"*\n\n" +
+        "Tell us about your business or idea, or tap one of the quick questions below to get started!",
     },
   ]);
   const [input, setInput] = useState('');
@@ -370,15 +377,16 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({
       // Safety check: ensure accumulated content is not empty
       if (!accumulatedContent.trim()) {
         const fallbackText =
-          "Welcome to Kaizen Software Agency. I am your Senior Technical Sales Director.\n\n" +
-          "We engineer bespoke digital systems with zero financial risk: **30% advance to start**, and **70% balance strictly payable only after you approve** the live deployment.\n\n" +
-          "### 📊 Flagship Turnkey Packages\n\n" +
-          "| Package | Best Suited For | Deliverables | Investment | 30% Advance | 70% Balance | Turnaround |\n" +
+          "👋 **Hi! How can we help you today?**\n\n" +
+          "We build custom websites and tools with zero financial risk: **30% advance to start**, and **70% balance is paid only after you approve** the working live site.\n\n" +
+          "### 📊 Popular Packages & Pricing\n\n" +
+          "| Package | Best For | What You Get | Total Price | 30% Advance | 70% on Approval | Delivery Time |\n" +
           "|---|---|---|---|---|---|---|\n" +
-          "| **Starter Bundle** | Local shops, solo brands, portfolios | 1-Page landing page, responsive layout, WhatsApp lead chat | **₹4,999** | ₹1,500 | ₹3,499 | 3–5 Days |\n" +
-          "| **Shop & Cafe Bundle** | Cafes, bakeries, restaurants, retail | QR digital menu, 1-click WhatsApp order engine, review booster | **₹6,999** | ₹2,100 | ₹4,899 | 5–7 Days |\n" +
-          "| **Growth Engine Bundle** | Clinics, salons, gyms, webapps | Multi-page webapp, 24/7 WhatsApp bot, client dashboard | **₹11,999** | ₹3,600 | ₹8,399 | 7–10 Days |\n\n" +
-          "Every package includes **2 full revision rounds**, **100% full code ownership**, and **free hypercare support**. Tell me about your business or project to lock in your scope!";
+          "| **Starter Bundle** | Local shops, solo brands, portfolios | 1-Page high-converting website, mobile responsive, WhatsApp chat | **₹4,999** | ₹1,500 | ₹3,499 | 3–5 Days |\n" +
+          "| **Shop & Cafe Bundle** | Cafes, restaurants, bakeries, retail | Digital QR menu, 1-click WhatsApp ordering, Google review card | **₹6,999** | ₹2,100 | ₹4,899 | 5–7 Days |\n" +
+          "| **Growth Engine Bundle** | Clinics, salons, gyms, web applications | Multi-page web app, 24/7 WhatsApp inquiry bot, client order dashboard | **₹11,999** | ₹3,600 | ₹8,399 | 7–10 Days |\n\n" +
+          "Every package includes **2 full revision rounds**, **100% full source code ownership**, and **free post-launch support**.\n\n" +
+          "Tell us about your business or what you want to build, and we'll give you exact recommendations!";
         setMessages((prev) =>
           prev.map((msg) =>
             msg.id === assistantMsgId
@@ -395,7 +403,7 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({
       }
 
       const errorMessage =
-        "\n\n*(Unable to reach the consultation service right now. Please message us directly on WhatsApp.)*";
+        "\n\n*(We're having trouble connecting to instant chat right now. Please tap **Discuss on WhatsApp** below to message our team directly!)*";
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantMsgId
@@ -427,7 +435,7 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({
         id: 'welcome',
         role: 'assistant',
         content:
-          "**Conversation reset.**\n\nWhat kind of business or project are you looking to launch? Tell me your goals and I will configure a tailored solution with itemized deliverables, timelines, and 30/70 payment terms.",
+          "👋 **Chat reset.**\n\nWhat kind of business or project are you looking to launch? Tell us what you need and we will give you exact pricing, features, and delivery timeline in seconds.",
       },
     ]);
   };
@@ -446,7 +454,7 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({
           boxShadow: '0 25px 60px -15px rgba(0,0,0,0.85), 0 0 1px 1px rgba(255,255,255,0.08) inset',
         }}
       >
-        {/* 1. Header Bar: Studio Architecture & Minimalist Controls */}
+        {/* 1. Header Bar: Help & Pricing */}
         <div className="px-5 py-4 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.015] shrink-0">
           <div className="flex items-center gap-3">
             {/* Geometric Studio Mark */}
@@ -456,11 +464,12 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-sans font-semibold text-sm text-white tracking-tight">
-                  KAIZEN ARCHITECT
+                  Kaizen Project & Pricing Help
                 </span>
               </div>
-              <p className="text-[11px] font-mono text-neutral-400">
-                Bespoke Solutions & Quotations
+              <p className="text-[11px] font-mono text-neutral-400 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-soft-breath" />
+                Ask any question • Instant answers
               </p>
             </div>
           </div>
@@ -823,7 +832,7 @@ function buildWhatsAppHandoffMessage(content: string, allMessages?: Message[]): 
     }
   }
 
-  let msg = `Hi Kaizen Team! I reviewed the proposal from your Solutions Architect on your website and I would like to move forward:\n\n`;
+  let msg = `Hi Kaizen Team! I was chatting on your website and I would like to discuss moving forward with this project:\n\n`;
 
   if (clientWanted) {
     msg += `🎯 What I Wanted & Needed:\n• ${clientWanted.slice(0, 220)}\n\n`;
