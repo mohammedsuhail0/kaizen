@@ -46,7 +46,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
     { id: 'bundles', index: '03.', label: 'Popular Bundles' },
     { id: 'demos', index: '04.', label: 'Live Client Demos' },
     { id: 'quotation', index: '05.', label: 'Instant Quotation' },
-    { id: 'brand', index: '06.', label: 'Brand & Style Guide' },
   ];
 
   const handleItemClick = (id: string) => {

@@ -6,7 +6,6 @@ import { ServicesSection } from './components/ServicesSection';
 import { BundlesSection } from './components/BundlesSection';
 import { PortfolioShowcase } from './components/PortfolioShowcase';
 import { EstimatorSection } from './components/EstimatorSection';
-import { BrandSection } from './components/BrandSection';
 import { MobileView } from './components/mobile/MobileView';
 import { ChatDrawer } from './components/ChatDrawer';
 import { ChatLauncher } from './components/ChatLauncher';
@@ -16,12 +15,12 @@ export function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>(() => {
     const hash = window.location.hash.replace('#', '').toLowerCase();
-    if (['hero', 'services', 'bundles', 'demos', 'quotation', 'brand'].includes(hash)) {
+    if (['hero', 'services', 'bundles', 'demos', 'quotation'].includes(hash)) {
       return hash;
     }
     const params = new URLSearchParams(window.location.search);
     const sec = params.get('section')?.toLowerCase();
-    if (sec && ['hero', 'services', 'bundles', 'demos', 'quotation', 'brand'].includes(sec)) {
+    if (sec && ['hero', 'services', 'bundles', 'demos', 'quotation'].includes(sec)) {
       return sec;
     }
     return 'hero';
@@ -36,7 +35,7 @@ export function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (['hero', 'services', 'bundles', 'demos', 'quotation', 'brand'].includes(hash)) {
+      if (['hero', 'services', 'bundles', 'demos', 'quotation'].includes(hash)) {
         setActiveSection(hash);
       }
     };
@@ -44,7 +43,7 @@ export function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Keyboard navigation between sections (1-6) for desktop
+  // Keyboard navigation between sections (1-5) for desktop
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
@@ -53,7 +52,6 @@ export function App() {
       if (e.key === '3') navigateTo('bundles');
       if (e.key === '4') navigateTo('demos');
       if (e.key === '5') navigateTo('quotation');
-      if (e.key === '6') navigateTo('brand');
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -123,10 +121,6 @@ export function App() {
 
             {(activeSection === 'quotation' || activeSection === 'estimator' || activeSection === 'contact') && (
               <EstimatorSection />
-            )}
-
-            {activeSection === 'brand' && (
-              <BrandSection />
             )}
           </div>
         </main>
