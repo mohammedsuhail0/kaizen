@@ -101,18 +101,15 @@ export const BundlesSection: React.FC<BundlesSectionProps> = ({ onOpenQuotation 
                   : 'bg-gradient-to-b from-white/[0.06] via-white/[0.03] to-white/[0.015] backdrop-blur-2xl border border-white/10 hover:border-white/25 shadow-[0_20px_45px_-15px_rgba(0,0,0,0.7)] hover:bg-white/[0.05]'
               }`}
             >
-              {/* Featured Ribbon Badge / Introductory Badge */}
-              <div className="absolute -top-3.5 left-6 right-6 flex items-center justify-between pointer-events-none">
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-400/15 border border-emerald-400/40 text-emerald-300 font-mono text-[10px] font-bold tracking-wider uppercase shadow-[0_0_12px_rgba(16,185,129,0.3)]">
-                  Introductory pricing
-                </span>
-                {isFeatured && (
+              {/* Featured Ribbon Badge */}
+              {isFeatured && (
+                <div className="absolute -top-3.5 right-6 pointer-events-none">
                   <span className="px-3 py-0.5 rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 text-white font-mono text-[10px] font-bold tracking-widest uppercase shadow-[0_0_18px_rgba(0,245,255,0.6)] flex items-center gap-1">
                     <span>★</span>
                     <span>MOST POPULAR</span>
                   </span>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Card Header & Pricing */}
               <div className="pt-2">

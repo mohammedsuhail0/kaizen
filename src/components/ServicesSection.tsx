@@ -158,15 +158,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         {/* Right Column: Active Service Details */}
         <div className="stagger-service md:col-span-7 border-t md:border-t-0 md:border-l border-white/15 md:pl-6 text-left flex flex-col justify-between">
           <div>
-            {/* Header: Scope, Introductory Badge, & Price */}
+            {/* Header: Scope & Price */}
             <div className="flex items-start justify-between gap-4 border-b border-white/15 pb-3 mb-3">
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="type-meta text-cyan-400 font-semibold">
                     {currentCat.title}
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-400/15 border border-emerald-400/40 text-emerald-300 font-mono text-[9px] font-bold tracking-wider uppercase">
-                    Introductory pricing
                   </span>
                 </div>
                 <h3 className="type-h3 text-white">

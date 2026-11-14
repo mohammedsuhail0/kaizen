@@ -433,11 +433,6 @@ export const MobileView: React.FC<MobileViewProps> = ({ initialSection = 'hero',
                     <div key={s.id} className="py-4 space-y-2 text-left">
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-0.5">
-                            <span className="px-1.5 py-0.2 rounded bg-emerald-400/15 border border-emerald-400/30 text-emerald-300 font-mono text-[9px] uppercase">
-                              Introductory
-                            </span>
-                          </div>
                           <h3 className="text-sm font-bold text-white font-sans leading-snug">{s.name}</h3>
                           <div className="flex items-baseline gap-2 mt-0.5">
                             <span className="text-xs font-mono font-bold text-emerald-400">
@@ -518,18 +513,15 @@ export const MobileView: React.FC<MobileViewProps> = ({ initialSection = 'hero',
                         : 'bg-gradient-to-b from-white/[0.07] via-white/[0.03] to-white/[0.015] backdrop-blur-2xl border border-white/10 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)]'
                     }`}
                   >
-                    {/* Featured / Introductory Badges */}
-                    <div className="flex items-center justify-between">
-                      <span className="px-2 py-0.5 rounded-full bg-emerald-400/15 border border-emerald-400/40 text-emerald-300 font-mono text-[9px] font-bold tracking-wider uppercase">
-                        Introductory pricing
-                      </span>
-                      {isShop && (
+                    {/* Featured Ribbon Badge */}
+                    {isShop && (
+                      <div className="flex justify-end">
                         <span className="px-3 py-0.5 rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 text-white font-mono text-[9px] font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,245,255,0.6)] flex items-center gap-1">
                           <span>★</span>
                           <span>MOST POPULAR</span>
                         </span>
-                      )}
-                    </div>
+                      </div>
+                    )}
 
                     {/* Top Row: Plan name and timeline */}
                     <div className="flex items-center justify-between type-meta pt-0.5 font-mono">
