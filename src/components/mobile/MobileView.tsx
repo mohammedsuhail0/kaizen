@@ -495,10 +495,6 @@ export const MobileView: React.FC<MobileViewProps> = ({ initialSection = 'hero',
         {activeTab === 'bundles' && (
           <div className="space-y-5 text-left relative">
             <div className="stagger-mobile">
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/[0.05] border border-white/15 text-[10px] font-mono font-medium text-cyan-300 uppercase tracking-wider mb-2">
-                <Sparkles className="w-3 h-3 text-cyan-400" />
-                <span>Turnkey Packages</span>
-              </div>
               <h2 className="type-h2 text-white">
                 Predictable Investment.
               </h2>

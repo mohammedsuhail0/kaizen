@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { animate, stagger, cubicBezier } from 'animejs';
-import { Check, ArrowUpRight, Zap, Store, Rocket, Sparkles } from 'lucide-react';
+import { Check, ArrowUpRight, Zap, Store, Rocket } from 'lucide-react';
 import { BUNDLES, getWhatsAppUrl, handleWhatsAppInstantClick, formatINR } from '../data/agencyData';
 import type { BundleItem } from '../data/agencyData';
 
@@ -61,10 +61,6 @@ export const BundlesSection: React.FC<BundlesSectionProps> = ({ onOpenQuotation 
       {/* 2. Section Header Strip */}
       <div className="stagger-bundle flex flex-wrap items-end justify-between border-b border-white/10 pb-4 mb-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/15 text-[11px] font-mono font-medium text-cyan-300 uppercase tracking-wider mb-2">
-            <Sparkles className="w-3 h-3 text-cyan-400" />
-            <span>Turnkey Packages</span>
-          </div>
           <h2 className="type-h2 text-white">
             Predictable Investment. Zero Hidden Costs.
           </h2>
