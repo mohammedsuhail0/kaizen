@@ -74,6 +74,7 @@ export const VideoEngine: React.FC<VideoEngineProps> = ({
         <video
           ref={pinkVideoRef}
           src="/kaizen-pink.mp4"
+          poster="/japanese-zen-bg.webp"
           autoPlay
           loop
           muted
@@ -87,6 +88,7 @@ export const VideoEngine: React.FC<VideoEngineProps> = ({
           <video
             ref={blueVideoRef}
             src="/kaizen-blue.mp4"
+            poster="/japanese-zen-bg.webp"
             autoPlay
             muted
             playsInline

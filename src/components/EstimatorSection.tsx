@@ -1,17 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { animate, stagger, cubicBezier } from 'animejs';
 import { MessageSquare, Check, X, RotateCcw } from 'lucide-react';
-import { BUNDLES, ALL_SERVICES, getWhatsAppUrl, handleWhatsAppInstantClick } from '../data/agencyData';
+import {
+  BUNDLES,
+  ALL_SERVICES,
+  getWhatsAppUrl,
+  handleWhatsAppInstantClick,
+  formatINR,
+  calculateAdvance,
+  calculateBalance,
+  calculateCombinedTimeline,
+} from '../data/agencyData';
 import type { BundleItem, ServiceItem } from '../data/agencyData';
 
 interface QuotableItem {
   id: string;
   name: string;
   price: number;
+  regularPrice?: number;
   category: 'bundle' | 'website' | 'booking' | 'billing-crm' | 'whatsapp-automation' | 'monthly-plans';
   categoryLabel: string;
   description: string;
   turnaround: string;
+  timeline?: string;
   popular?: boolean;
 }
 
@@ -21,10 +32,12 @@ const quoteOptions: QuotableItem[] = [
     id: b.id,
     name: b.name,
     price: b.numericPrice,
+    regularPrice: b.regularPrice,
     category: 'bundle',
     categoryLabel: 'Turnkey Bundles',
     description: b.tagline,
     turnaround: b.timeline,
+    timeline: b.timeline,
     popular: b.popular,
   })),
   ...ALL_SERVICES.map((s: ServiceItem): QuotableItem => {
@@ -38,6 +51,7 @@ const quoteOptions: QuotableItem[] = [
       id: s.id,
       name: s.name,
       price: s.numericPrice,
+      regularPrice: s.regularPrice,
       category: cat,
       categoryLabel: s.categoryLabel,
       description: s.description,
@@ -75,7 +89,7 @@ export const EstimatorSection: React.FC = () => {
     { id: 'billing-crm', label: 'CRM & Billing', count: quoteOptions.filter((o) => o.category === 'billing-crm').length },
     { id: 'whatsapp-automation', label: 'WhatsApp', count: quoteOptions.filter((o) => o.category === 'whatsapp-automation').length },
     { id: 'monthly-plans', label: 'Monthly Care', count: quoteOptions.filter((o) => o.category === 'monthly-plans').length },
-    { id: 'all', label: 'All Modules', count: quoteOptions.length },
+    { id: 'all', label: 'All Services', count: quoteOptions.length },
   ];
 
   const handleSelectPreset = (preset: 'cafe' | 'clinic' | 'gym' | 'starter' | 'clear') => {
@@ -117,14 +131,15 @@ export const EstimatorSection: React.FC = () => {
   const oneTimeTotal = oneTimeItems.reduce((acc, curr) => acc + curr.price, 0);
   const monthlyTotal = monthlyItems.reduce((acc, curr) => acc + curr.price, 0);
 
-  const advancePayment = Math.round(oneTimeTotal * 0.3);
-  const deliveryBalance = oneTimeTotal - advancePayment;
+  // Exact advance calculation formula: Math.round(price * 0.3 / 10) * 10
+  const advancePayment = calculateAdvance(oneTimeTotal);
+  const deliveryBalance = calculateBalance(oneTimeTotal);
 
-  const hasCustomTools = oneTimeItems.some((i) => ['booking', 'billing-crm'].includes(i.category));
-  const timelineText = hasCustomTools ? '1 to 2 Weeks' : oneTimeItems.length > 0 ? '3 to 7 Days' : 'Immediate';
+  // Single data source combined timeline
+  const timelineText = calculateCombinedTimeline(oneTimeItems);
 
   const itemsSummary = selectedItems
-    .map((i) => `• ${i.name} (Rs. ${i.price.toLocaleString('en-IN')})`)
+    .map((i) => `• ${i.name} (${formatINR(i.price)}${i.category === 'monthly-plans' ? '/mo' : ''})`)
     .join('\n');
 
   const clientInquiryMessage = [
@@ -133,8 +148,9 @@ export const EstimatorSection: React.FC = () => {
     `I'm interested in getting this built for my business:`,
     itemsSummary,
     ``,
-    `Estimated Total: Rs. ${oneTimeTotal.toLocaleString('en-IN')}${monthlyTotal > 0 ? ` + Rs. ${monthlyTotal.toLocaleString('en-IN')}/mo support` : ''}`,
-    `30% Advance: Rs. ${advancePayment.toLocaleString('en-IN')}`,
+    `Estimated Total: ${formatINR(oneTimeTotal)}${monthlyTotal > 0 ? ` + ${formatINR(monthlyTotal)}/mo support` : ''}`,
+    `Pay 30% to start: ${formatINR(advancePayment)}`,
+    `70% when you're happy: ${formatINR(deliveryBalance)}`,
     `Estimated Timeline: ~${timelineText}`,
     ``,
     `Could you let me know how we can get started and what you'd need from my end? Thanks!`,
@@ -144,8 +160,9 @@ export const EstimatorSection: React.FC = () => {
 
   return (
     <div
+      id="quotation"
       ref={sectionRef}
-      className="w-full text-left select-none flex flex-col justify-center max-w-5xl py-2"
+      className="w-full text-left select-none flex flex-col justify-center max-w-5xl py-2 scroll-mt-24"
     >
       {/* 1. Top Section Header */}
       <div className="stagger-quote flex flex-wrap items-end justify-between border-b border-white/15 pb-3 mb-4">
@@ -153,47 +170,54 @@ export const EstimatorSection: React.FC = () => {
           <h2 className="type-h2 text-white">
             Custom Build Scope &amp; Investment.
           </h2>
+          <p className="type-body text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl font-sans">
+            Select what your business needs. Pay 30% to start, 70% when you're happy.
+          </p>
         </div>
 
         {/* Commercial Terms Badge */}
-        <div className="type-meta text-slate-300 flex items-center gap-2 mt-2 sm:mt-0">
-          <span className="text-slate-400">Commercial Split:</span>
+        <div className="type-meta text-slate-300 flex items-center gap-2 mt-2 sm:mt-0 font-sans">
+          <span className="text-slate-300 font-medium">How payment works:</span>
           <span className="text-emerald-400 font-bold border-b border-emerald-400/40 pb-0.5">
-            30% Advance • 70% Upon Approval
+            Pay 30% to start, 70% when you're happy
           </span>
         </div>
       </div>
 
-      {/* 2. Architectural Presets Strip (Underline, Zero Pills) */}
+      {/* 2. Architectural Presets Strip */}
       <div className="stagger-quote flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3 mb-4 type-meta">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="text-slate-400 font-semibold text-xs">
+          <span className="text-slate-300 font-semibold text-xs font-mono">
             Industry Presets:
           </span>
           <button
             onClick={() => handleSelectPreset('cafe')}
-            className="touch-target py-1 text-slate-300 hover:text-white border-b border-white/20 hover:border-cyan-400 transition-colors cursor-pointer focus-visible:outline-emerald-400 active:scale-95"
+            className="touch-target py-1 text-slate-200 hover:text-white border-b border-white/20 hover:border-cyan-400 transition-colors cursor-pointer focus-visible:outline-emerald-400 active:scale-95"
+            aria-label="Preset for Cafe or Retail"
           >
             Cafe / Retail
           </button>
           <span className="text-zinc-600">/</span>
           <button
             onClick={() => handleSelectPreset('clinic')}
-            className="touch-target py-1 text-slate-300 hover:text-white border-b border-white/20 hover:border-cyan-400 transition-colors cursor-pointer focus-visible:outline-emerald-400 active:scale-95"
+            className="touch-target py-1 text-slate-200 hover:text-white border-b border-white/20 hover:border-cyan-400 transition-colors cursor-pointer focus-visible:outline-emerald-400 active:scale-95"
+            aria-label="Preset for Clinic or Salon"
           >
             Clinic / Salon
           </button>
           <span className="text-zinc-600">/</span>
           <button
             onClick={() => handleSelectPreset('gym')}
-            className="touch-target py-1 text-slate-300 hover:text-white border-b border-white/20 hover:border-cyan-400 transition-colors cursor-pointer focus-visible:outline-emerald-400 active:scale-95"
+            className="touch-target py-1 text-slate-200 hover:text-white border-b border-white/20 hover:border-cyan-400 transition-colors cursor-pointer focus-visible:outline-emerald-400 active:scale-95"
+            aria-label="Preset for Gym or Academy"
           >
             Gym / Academy
           </button>
           <span className="text-zinc-600">/</span>
           <button
             onClick={() => handleSelectPreset('starter')}
-            className="touch-target py-1 text-slate-300 hover:text-white border-b border-white/20 hover:border-cyan-400 transition-colors cursor-pointer focus-visible:outline-emerald-400 active:scale-95"
+            className="touch-target py-1 text-slate-200 hover:text-white border-b border-white/20 hover:border-cyan-400 transition-colors cursor-pointer focus-visible:outline-emerald-400 active:scale-95"
+            aria-label="Preset for Starter Package"
           >
             Starter Package
           </button>
@@ -202,7 +226,8 @@ export const EstimatorSection: React.FC = () => {
         {selectedIds.length > 0 && (
           <button
             onClick={() => handleSelectPreset('clear')}
-            className="touch-target py-1 type-meta text-slate-400 hover:text-rose-400 flex items-center gap-1.5 transition-colors cursor-pointer ml-auto sm:ml-0 focus-visible:outline-rose-400 active:scale-95"
+            className="touch-target py-1 type-meta text-slate-300 hover:text-rose-400 flex items-center gap-1.5 transition-colors cursor-pointer ml-auto sm:ml-0 focus-visible:outline-rose-400 active:scale-95 font-mono"
+            aria-label="Reset all selections"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Selections</span>
@@ -210,12 +235,12 @@ export const EstimatorSection: React.FC = () => {
         )}
       </div>
 
-      {/* 3. Main Split Stage (Selector on Left, Real-time Ledger on Right) */}
+      {/* 3. Main Split Stage */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         {/* Left Column: Category Tabs & Selectable Items */}
         <div className="stagger-quote md:col-span-7 flex flex-col justify-between">
           {/* Typographic Category Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 border-b border-white/10 pb-2 mb-3 type-meta">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 border-b border-white/10 pb-2 mb-3 type-meta font-mono">
             {filterTabs.map((tab) => {
               const isActive = activeFilter === tab.id;
               return (
@@ -227,9 +252,10 @@ export const EstimatorSection: React.FC = () => {
                       ? 'border-emerald-400 text-white font-bold drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]'
                       : 'border-transparent text-slate-400 hover:text-white'
                   }`}
+                  aria-label={`Filter by ${tab.label}`}
                 >
                   <span>{tab.label}</span>
-                  <span className={`text-xs ml-1 ${isActive ? 'text-emerald-400' : 'text-slate-500'}`}>
+                  <span className={`text-xs ml-1 ${isActive ? 'text-emerald-400' : 'text-slate-400'}`}>
                     ({tab.count})
                   </span>
                 </button>
@@ -237,7 +263,7 @@ export const EstimatorSection: React.FC = () => {
             })}
           </div>
 
-          {/* Selectable Modules Ledger */}
+          {/* Selectable Services Ledger */}
           <div className="space-y-1.5 max-h-[300px] overflow-y-auto pr-1 no-scrollbar">
             {filteredItems.map((item) => {
               const isSelected = selectedIds.includes(item.id);
@@ -252,7 +278,6 @@ export const EstimatorSection: React.FC = () => {
                   }`}
                 >
                   <div className="flex items-center gap-3 flex-1 min-w-0 mr-2">
-                    {/* Architectural Square Check indicator (Min 20px with accessible touch feel) */}
                     <div
                       className={`w-4 h-4 flex items-center justify-center border shrink-0 text-[10px] transition-[background-color,border-color] duration-150 ${
                         isSelected
@@ -269,12 +294,12 @@ export const EstimatorSection: React.FC = () => {
                           {item.name}
                         </span>
                         {item.popular && (
-                          <span className="type-meta text-cyan-300 font-bold shrink-0">
+                          <span className="type-meta text-cyan-300 font-bold shrink-0 font-mono text-[10px]">
                             ★ POPULAR
                           </span>
                         )}
                       </div>
-                      <div className="type-meta text-slate-400 leading-tight mt-0.5">
+                      <div className="type-meta text-slate-300 leading-tight mt-0.5 font-sans">
                         {item.description}
                       </div>
                     </div>
@@ -282,9 +307,9 @@ export const EstimatorSection: React.FC = () => {
 
                   <div className="text-right shrink-0">
                     <div className={`text-sm font-mono font-bold ${isSelected ? 'text-emerald-300' : 'text-emerald-400'}`}>
-                      Rs. {item.price.toLocaleString('en-IN')}{item.category === 'monthly-plans' ? '/mo' : ''}
+                      {formatINR(item.price)}{item.category === 'monthly-plans' ? '/mo' : ''}
                     </div>
-                    <div className="type-meta text-slate-400">
+                    <div className="type-meta text-slate-300 font-mono text-xs">
                       ⏱ {item.turnaround}
                     </div>
                   </div>
@@ -294,21 +319,21 @@ export const EstimatorSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Column: Architectural Quotation Ledger Console (Optical Glass, Zero Card-in-Card) */}
+        {/* Right Column: Your Quote (Replaced Project Ledger) */}
         <div className="stagger-quote md:col-span-5 border-t md:border-t-0 md:border-l border-white/15 md:pl-6 text-left flex flex-col justify-between glass-surface p-4">
           <div>
             {/* Ledger Header */}
-            <div className="type-meta text-cyan-400 font-bold mb-2 flex items-center justify-between border-b border-white/15 pb-2">
-              <span>PROJECT LEDGER</span>
-              <span className="text-slate-300 text-xs">
-                {selectedItems.length} {selectedItems.length === 1 ? 'MODULE' : 'MODULES'}
+            <div className="type-meta text-cyan-400 font-bold mb-2 flex items-center justify-between border-b border-white/15 pb-2 font-mono">
+              <span>YOUR QUOTE</span>
+              <span className="text-slate-200 text-xs">
+                {selectedItems.length} {selectedItems.length === 1 ? 'SERVICE' : 'SERVICES'}
               </span>
             </div>
 
             {/* Selected Items */}
-            <div className="space-y-1.5 font-mono text-xs max-h-24 overflow-y-auto pr-1 border-b border-white/10 pb-2 mb-3 no-scrollbar">
+            <div className="space-y-1.5 font-sans text-xs max-h-24 overflow-y-auto pr-1 border-b border-white/10 pb-2 mb-3 no-scrollbar">
               {selectedItems.length === 0 ? (
-                <div className="text-slate-400 py-3 text-center type-meta font-sans">
+                <div className="text-slate-300 py-3 text-center type-meta font-sans">
                   Select services on the left to calculate exact investment.
                 </div>
               ) : (
@@ -329,7 +354,7 @@ export const EstimatorSection: React.FC = () => {
                       <span className="leading-tight truncate">{item.name}</span>
                     </span>
                     <span className="text-white shrink-0 font-bold font-mono">
-                      Rs. {item.price.toLocaleString('en-IN')}{item.category === 'monthly-plans' ? '/mo' : ''}
+                      {formatINR(item.price)}{item.category === 'monthly-plans' ? '/mo' : ''}
                     </span>
                   </div>
                 ))
@@ -337,47 +362,47 @@ export const EstimatorSection: React.FC = () => {
             </div>
 
             {/* Investment Schedule */}
-            <div className="space-y-1.5 font-mono text-xs border-b border-white/10 pb-3 mb-3">
+            <div className="space-y-1.5 font-sans text-xs border-b border-white/10 pb-3 mb-3">
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Estimated Delivery:</span>
-                <span className="text-emerald-400 font-bold">{timelineText}</span>
+                <span className="text-slate-300">Estimated Delivery:</span>
+                <span className="text-emerald-400 font-bold font-mono">{timelineText}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">30% Advance to Start:</span>
-                <span className="text-emerald-300 font-bold">Rs. {advancePayment.toLocaleString('en-IN')}</span>
+                <span className="text-slate-300">Pay 30% to start:</span>
+                <span className="text-emerald-300 font-bold font-mono">{formatINR(advancePayment)}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">70% Balance on Delivery:</span>
-                <span className="text-slate-200 font-medium">Rs. {deliveryBalance.toLocaleString('en-IN')}</span>
+                <span className="text-slate-300">70% when you're happy:</span>
+                <span className="text-slate-200 font-medium font-mono">{formatINR(deliveryBalance)}</span>
               </div>
 
               {monthlyTotal > 0 && (
                 <div className="flex items-center justify-between pt-1 border-t border-white/10">
                   <span className="text-cyan-400">Monthly Support:</span>
-                  <span className="text-cyan-300 font-bold">Rs. {monthlyTotal.toLocaleString('en-IN')} / mo</span>
+                  <span className="text-cyan-300 font-bold font-mono">{formatINR(monthlyTotal)} / mo</span>
                 </div>
               )}
 
               <div className="flex items-center justify-between pt-2 border-t border-white/10">
-                <span className="text-white text-xs font-bold uppercase tracking-wider">Total Investment:</span>
+                <span className="text-white text-xs font-bold uppercase tracking-wider font-sans">Total Investment:</span>
                 <span className="text-2xl font-bold font-mono text-white">
-                  Rs. {oneTimeTotal.toLocaleString('en-IN')}
+                  {formatINR(oneTimeTotal)}
                 </span>
               </div>
             </div>
 
-            {/* Official Terms Brief */}
-            <div className="border-l-2 border-emerald-400 pl-3 py-1 mb-4 type-meta text-slate-300">
-              <span className="text-emerald-400 font-bold block mb-0.5">
-                Official Commercial Terms:
+            {/* What's Included Brief (Replaced Official Commercial Terms) */}
+            <div className="border-l-2 border-emerald-400 pl-3 py-1 mb-4 type-meta text-slate-200">
+              <span className="text-emerald-400 font-bold block mb-0.5 font-mono">
+                What's included:
               </span>
-              <p className="text-slate-300 leading-relaxed font-sans text-xs">
-                Includes 2 rounds of design revisions, 15 days of post-delivery bug fixes, and 100% full source code ownership.
+              <p className="text-slate-200 leading-relaxed font-sans text-xs">
+                Includes 2 rounds of changes, free support after delivery, and you own everything with no monthly lock-in.
               </p>
             </div>
           </div>
 
-          {/* Action Trigger with 5 States */}
+          {/* Action Trigger */}
           <div>
             <a
               href={waQuoteUrl}
@@ -385,6 +410,7 @@ export const EstimatorSection: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary w-full"
+              aria-label="Confirm quotation and send via WhatsApp"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Confirm &amp; Send on WhatsApp ↗</span>

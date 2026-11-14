@@ -8,10 +8,9 @@ interface NavbarProps {
   activeSection: string;
   onNavigate: (sectionId: string) => void;
   onOpenEstimator?: () => void;
-  onOpenChat?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenEstimator, onOpenChat }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenEstimator }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuNavRef = useRef<HTMLDivElement>(null);
 
@@ -92,33 +91,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
             <button
               onClick={onOpenEstimator}
               className="hidden lg:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-none bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 hover:border-emerald-400/50 text-xs font-mono text-slate-200 hover:text-white transition-[background-color,border-color,transform] duration-150 active:scale-95 cursor-pointer"
+              aria-label="Open Quote Builder"
             >
               <Calculator className="w-3.5 h-3.5 text-emerald-400" />
               <span>Quote Builder</span>
             </button>
-          )}
-
-          {onOpenChat ? (
-            <button
-              onClick={onOpenChat}
-              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-neutral-200 hover:text-white text-xs font-mono tracking-wider transition-all duration-150 active:scale-95 cursor-pointer backdrop-blur-md"
-              title="Need Help? Ask Us"
-              aria-label="Need Help? Ask Us"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-soft-breath shrink-0" />
-              <span>Need Help?</span>
-            </button>
-          ) : (
-            <a
-              href={getWhatsAppUrl("Hi! I came across your website and I'd like to discuss a project for my business. Can we connect?")}
-              onClick={(e) => handleWhatsAppInstantClick(e, "Hi! I came across your website and I'd like to discuss a project for my business. Can we connect?")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-mono font-bold tracking-wider uppercase transition-[background-color,transform,box-shadow] duration-150 active:scale-95 shadow-[0_0_15px_rgba(16,185,129,0.35)]"
-            >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>Chat ↗</span>
-            </a>
           )}
         </div>
       </header>

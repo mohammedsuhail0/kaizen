@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kaizen-software-agency.netlify.app/sitemap.xml
+Sitemap: https://kaizen-agency.vercel.app/sitemap.xml

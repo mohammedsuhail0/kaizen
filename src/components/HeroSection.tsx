@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { animate, stagger, cubicBezier } from 'animejs';
-import { ArrowRight, MessageSquare, Check } from 'lucide-react';
-import { getWhatsAppUrl, handleWhatsAppInstantClick } from '../data/agencyData';
+import { ArrowRight, MessageSquare } from 'lucide-react';
+import { getWhatsAppUrl, handleWhatsAppInstantClick, AGENCY_CONFIG } from '../data/agencyData';
 
 interface HeroSectionProps {
   onExploreServices: () => void;
@@ -32,55 +32,56 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <div
+      id="hero"
       ref={heroRef}
-      className="w-full text-left select-none flex flex-col justify-center max-w-4xl py-3"
+      className="w-full text-left select-none flex flex-col justify-center max-w-4xl py-3 scroll-mt-24"
     >
-      {/* 1. High-Impact Mathematical Master Headline (Clamp 2.5rem-4.25rem, line-height 1.1) */}
+      {/* 1. Master Headline */}
       <h1 className="stagger-reveal type-hero text-white mb-4 drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] max-w-3xl">
-        Turn your idea into software that drives real business.
+        Websites, booking &amp; QR menus that bring more customers to your business.
       </h1>
 
-      {/* 3. Direct Commercial Narrative (Scannable in < 3 seconds, line-height 1.65) */}
-      <p className="stagger-reveal type-body text-slate-200 mb-6 max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
-        Custom-built for growing businesses, clinics, cafes, salons, and ambitious creators. From high-converting business websites, QR digital menus, and online booking engines, to client management portals — engineered 100% around your workflow.
+      {/* 2. Direct Commercial Narrative */}
+      <p className="stagger-reveal type-body text-slate-200 mb-6 max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] font-sans text-base sm:text-lg leading-relaxed">
+        Fixed-price websites and simple systems for cafes, clinics, salons, gyms and shops. Built for you, delivered in days, and you own everything.
       </p>
 
-      {/* 4. Commercial Trust Metrics (Single Elevated Glass Layer, Zero Card-in-Card Nesting) */}
-      <div className="stagger-reveal glass-surface py-3 px-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-2 text-xs sm:text-sm font-mono text-slate-200">
+      {/* 3. Commercial Trust Metrics */}
+      <div className="stagger-reveal glass-surface py-3 px-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-2 text-xs sm:text-sm font-sans text-slate-200 border border-white/15">
         <div className="flex items-center gap-2">
-          <span className="text-emerald-400 font-bold">₹4,999</span>
-          <span className="text-slate-300">Starter packages</span>
+          <span className="text-emerald-400 font-bold font-mono">₹4,999</span>
+          <span className="text-slate-200">Starter packages</span>
         </div>
         <div className="hidden sm:block text-zinc-600">/</div>
         <div className="flex items-center gap-2">
-          <span className="text-white font-bold">30% advance</span>
-          <span className="text-slate-300">70% on delivery approval</span>
+          <span className="text-emerald-300 font-semibold">Pay 30% to start</span>
+          <span className="text-slate-300">70% when you're happy</span>
         </div>
         <div className="hidden sm:block text-zinc-600">/</div>
         <div className="flex items-center gap-2">
-          <span className="text-white font-bold">100% ownership</span>
-          <span className="text-slate-300">Full code &amp; assets</span>
+          <span className="text-white font-medium">You own everything.</span>
+          <span className="text-slate-300">No monthly lock-in.</span>
         </div>
         <div className="hidden sm:block text-zinc-600">/</div>
         <div className="flex items-center gap-2">
-          <span className="text-cyan-300 font-bold">15 days</span>
-          <span className="text-slate-300">Free hypercare</span>
+          <span className="text-cyan-300 font-bold font-mono">15 days</span>
+          <span className="text-slate-300">Free support</span>
         </div>
       </div>
 
-      {/* 5. Architectural Action Triggers (5 Interactive States, Min 48px Touch Targets) */}
-      <div className="stagger-reveal flex flex-wrap items-center gap-4 text-xs sm:text-sm">
-        {/* Primary Emerald Action CTA */}
+      {/* 4. Action Triggers: One Clear Primary Hero CTA, others visually secondary */}
+      <div className="stagger-reveal flex flex-wrap items-center gap-3.5 text-xs sm:text-sm">
+        {/* Sole Primary Hero CTA */}
         <button
           onClick={onOpenQuotation}
           className="btn-primary"
-          aria-label="Get instant quotation"
+          aria-label="Get Instant Quotation"
         >
           <span>Get Instant Quotation</span>
           <ArrowRight className="w-4 h-4" />
         </button>
 
-        {/* Secondary Architectural Buttons */}
+        {/* Visually Secondary Action Buttons */}
         <button
           onClick={onExploreServices}
           className="btn-secondary"
@@ -97,30 +98,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <span>Live Client Demos →</span>
         </button>
 
-        {/* Direct WhatsApp Chat Action */}
+        {/* WhatsApp Consultation Link */}
         <a
-          href={getWhatsAppUrl("Hi! I came across your website and I'm interested in getting a website / system built for my business. Can we discuss?")}
-          onClick={(e) => handleWhatsAppInstantClick(e, "Hi! I came across your website and I'm interested in getting a website / system built for my business. Can we discuss?")}
+          href={getWhatsAppUrl("Hi! I came across your website and I'd like to discuss a project for my business. Can we connect?")}
+          onClick={(e) => handleWhatsAppInstantClick(e, "Hi! I came across your website and I'd like to discuss a project for my business. Can we connect?")}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-ghost text-emerald-400 hover:text-emerald-300 ml-auto sm:ml-0"
-          title="Chat directly on WhatsApp"
+          className="btn-secondary text-emerald-400 hover:text-emerald-300 border-emerald-400/30"
+          aria-label={`Chat with ${AGENCY_CONFIG.founder.name} on WhatsApp`}
         >
-          <MessageSquare className="w-4 h-4 text-emerald-400" />
-          <span className="font-bold">WhatsApp Chat ↗</span>
+          <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+          <span>WhatsApp Chat ↗</span>
         </a>
       </div>
 
-      {/* 6. Reassurance Strip (WCAG AA Compliant 13px Text, No Tracked Badges) */}
-      <div className="stagger-reveal flex flex-wrap items-center gap-4 mt-6 type-meta text-slate-300">
-        <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
-          <Check className="w-4 h-4 text-emerald-400" />
-          <span>2 rounds of revisions included</span>
-        </span>
-        <span className="text-zinc-600">•</span>
-        <span>Custom-built for you</span>
-        <span className="text-zinc-600">•</span>
-        <span>Pick what you need, pay one flat price</span>
+      {/* 5. Minimal Guarantee Underline */}
+      <div className="stagger-reveal mt-5 flex items-center gap-3 text-xs font-sans text-slate-300">
+        <span className="text-emerald-400 font-bold">✓</span>
+        <span>2 rounds of revisions included</span>
+        <span className="text-zinc-600">·</span>
+        <span>Custom-built for your business</span>
+        <span className="text-zinc-600">·</span>
+        <span>Direct WhatsApp engineer support</span>
       </div>
     </div>
   );

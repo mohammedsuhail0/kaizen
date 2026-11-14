@@ -6,6 +6,7 @@ import { ServicesSection } from './components/ServicesSection';
 import { BundlesSection } from './components/BundlesSection';
 import { PortfolioShowcase } from './components/PortfolioShowcase';
 import { EstimatorSection } from './components/EstimatorSection';
+import { TrustSection } from './components/TrustSection';
 import { MobileView } from './components/mobile/MobileView';
 import { ChatDrawer } from './components/ChatDrawer';
 import { ChatLauncher } from './components/ChatLauncher';
@@ -58,7 +59,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen md:h-screen md:max-h-screen overflow-x-clip md:overflow-hidden text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] selection:bg-emerald-400 selection:text-slate-950 flex flex-col justify-between relative bg-transparent">
+    <div className="min-h-screen overflow-x-clip text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] selection:bg-emerald-400 selection:text-slate-950 flex flex-col justify-between relative bg-transparent">
       {/* 1. Cinematic Video Engine (The Blue Tree Video IS the Preloader, then smoothly dissolves into Pink Tree) */}
       <VideoEngine
         isPreloading={isPreloading}
@@ -80,7 +81,7 @@ export function App() {
 
       {/* 3. DEDICATED DESKTOP / LAPTOP LAYOUT (>= 768px viewports: Capped at max-w-7xl, Zero horizontal overflow) */}
       <div
-        className={`hidden md:flex h-full w-full flex-col justify-between transition-opacity duration-700 ease-out relative z-20 ${
+        className={`hidden md:flex min-h-screen w-full flex-col justify-between transition-opacity duration-700 ease-out relative z-20 ${
           isPreloading ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
@@ -89,11 +90,10 @@ export function App() {
           activeSection={activeSection}
           onNavigate={(id) => navigateTo(id)}
           onOpenEstimator={() => navigateTo('quotation')}
-          onOpenChat={() => setIsChatOpen(true)}
         />
 
         {/* Central View Stage (Strict max-w-7xl, breathing gutters, clean header clearance) */}
-        <main className="flex-1 flex items-center justify-center px-6 sm:px-8 lg:px-12 w-full max-w-7xl mx-auto pt-16 sm:pt-20 pb-4 overflow-hidden">
+        <main className="flex-1 flex flex-col justify-between px-6 sm:px-8 lg:px-12 w-full max-w-7xl mx-auto pt-20 sm:pt-24 pb-8">
           <div className="w-full">
             {activeSection === 'hero' && (
               <HeroSection
@@ -123,12 +123,16 @@ export function App() {
               <EstimatorSection />
             )}
           </div>
+
+          {/* Trust Section & Simple Footer on Desktop */}
+          <TrustSection onNavigate={(id) => navigateTo(id)} />
         </main>
 
         {/* Floating Help & Pricing Launcher & Teaser Note */}
         <ChatLauncher
           onOpenChat={() => setIsChatOpen(true)}
           isOpen={isChatOpen}
+          activeSection={activeSection}
         />
       </div>
 
