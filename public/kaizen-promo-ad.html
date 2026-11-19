@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAIZEN Software Agency · Dual-Aspect Promo Ad Studio (16:9 & 9:16)</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+JP:wght@700;900&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05080f;
+      --surface: #0a0f1d;
+      --card-bg: rgba(13, 19, 32, 0.75);
+      --card-border: rgba(0, 245, 255, 0.25);
+      --cyan: #00F5FF;
+      --cyan-glow: rgba(0, 245, 255, 0.4);
+      --blue: #0077FF;
+      --emerald: #10B981;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-display: 'Outfit', 'Cinzel', sans-serif;
+      --font-sans: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-jp: 'Noto Serif JP', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 18px;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(0, 245, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 90%, rgba(0, 119, 255, 0.08) 0%, transparent 40%);
+    }
+
+    /* Top Studio Header */
+    .studio-header {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 24px;
+      margin-bottom: 16px;
+      background: rgba(13, 19, 32, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-badge {
+      font-family: var(--font-jp);
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--cyan);
+      background: rgba(0, 245, 255, 0.1);
+      border: 1px solid var(--cyan);
+      border-radius: 8px;
+      padding: 4px 10px;
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: #fff;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Controls Bar */
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn:hover {
+      background: rgba(0, 245, 255, 0.15);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 14px rgba(0, 245, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .btn.active {
+      background: var(--cyan);
+      color: #05080f;
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px var(--cyan-glow);
+      font-weight: 700;
+    }
+
+    .btn-play {
+      background: linear-gradient(135deg, #00F5FF, #0077FF);
+      color: #05080f;
+      border: none;
+      font-weight: 700;
+      padding: 9px 20px;
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+    }
+
+    .btn-play:hover {
+      background: linear-gradient(135deg, #38BDF8, #00C8FF);
+      color: #05080f;
+      box-shadow: 0 0 25px rgba(0, 245, 255, 0.6);
+      transform: scale(1.03);
+    }
+
+    /* Stage Container */
+    .stage-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* Aspect Ratio Frames */
+    .ad-viewport {
+      position: relative;
+      background: #000;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(0, 245, 255, 0.3), 0 0 40px rgba(0, 245, 255, 0.15);
+      transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Landscape 16:9 */
+    .ad-viewport.aspect-16-9 {
+      width: 1000px;
+      height: 562.5px;
+      max-width: 95vw;
+    }
+
+    /* Vertical Reel 9:16 */
+    .ad-viewport.aspect-9-16 {
+      width: 360px;
+      height: 640px;
+      max-height: 85vh;
+    }
+
+    /* Mobile Scaling for 16:9 on small screens */
+    @media (max-width: 1050px) {
+      .ad-viewport.aspect-16-9 {
+        width: 92vw;
+        height: calc(92vw * (9 / 16));
+      }
+    }
+
+    /* Video Screen Canvas/Layers */
+    .ad-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #070B14;
+      overflow: hidden;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.6;
+      transition: all 0.8s ease;
+    }
+    .glow-cyan {
+      width: 350px;
+      height: 350px;
+      background: rgba(0, 245, 255, 0.22);
+      top: 10%;
+      left: 15%;
+    }
+    .glow-blue {
+      width: 400px;
+      height: 400px;
+      background: rgba(0, 119, 255, 0.25);
+      bottom: 5%;
+      right: 10%;
+    }
+
+    /* Grid Texture */
+    .tech-grid {
+      position: absolute;
+      inset: 0;
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      pointer-events: none;
+    }
+
+    /* 9:16 Safe Zone Overlays (Instagram Reels / TikTok) */
+    .safe-zone-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+      z-index: 100;
+    }
+    .aspect-9-16 .safe-zone-overlay.visible {
+      display: block;
+    }
+    .sz-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12%;
+      background: rgba(239, 68, 68, 0.15);
+      border-bottom: 1px dashed rgba(239, 68, 68, 0.6);
+      display: flex;
+      align-items: flex-end;
+      padding: 4px 8px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: #fca5a5;
+    }
+    .sz-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 18%;
+      background: rgba(239, 68, 68, 0.15);
+      border-top: 1px dashed rgba(239, 68, 68, 0.6);
+      display: flex;
+      align-items: flex-start;
+      padding: 4px 8px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: #fca5a5;
+    }
+    .sz-right {
+      position: absolute;
+      top: 12%;
+      bottom: 18%;
+      right: 0;
+      width: 15%;
+      background: rgba(245, 158, 11, 0.15);
+      border-left: 1px dashed rgba(245, 158, 11, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: #fcd34d;
+    }
+
+    /* SCENES CONTAINER */
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.96);
+      padding: 24px;
+      text-align: center;
+    }
+    .scene.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    /* SCENE 1: THE HOOK (0:00 - 0:03) */
+    .hook-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 245, 255, 0.08);
+      border: 1px solid rgba(0, 245, 255, 0.35);
+      border-radius: 9999px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 20px;
+      box-shadow: 0 0 16px rgba(0, 245, 255, 0.2);
+    }
+    .hook-headline {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4.5vw, 56px);
+      font-weight: 800;
+      line-height: 1.15;
+      max-width: 820px;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    }
+    .hook-headline span.accent {
+      background: linear-gradient(135deg, #00F5FF 0%, #38BDF8 50%, #0077FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+
+    /* SCENE 2: THE TEASE / PROBLEM (0:03 - 0:06) */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 800px;
+      width: 100%;
+    }
+    .aspect-9-16 .problem-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .problem-card {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 16px;
+      border-radius: 12px;
+      text-align: left;
+      backdrop-filter: blur(8px);
+    }
+    .problem-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #f87171;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .problem-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .problem-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* SCENE 3: THE DROP & 3D REVEAL (0:06 - 0:10) */
+    .reveal-stage {
+      position: relative;
+      perspective: 1200px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .flash-bang {
+      position: absolute;
+      inset: 0;
+      background: #00F5FF;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-out;
+      z-index: 50;
+    }
+    .flash-bang.bang {
+      opacity: 0.85;
+    }
+    .mockup-3d-wrap {
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    .aspect-9-16 .mockup-3d-wrap {
+      flex-direction: column;
+      transform: scale(0.85);
+    }
+
+    /* Realistic Glass Laptop Mockup */
+    .laptop-frame {
+      width: 480px;
+      height: 290px;
+      background: #111827;
+      border: 2px solid rgba(0, 245, 255, 0.5);
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 245, 255, 0.3);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .laptop-bar {
+      height: 22px;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-r { background: #ef4444; }
+    .dot-y { background: #f59e0b; }
+    .dot-g { background: #10b981; }
+    .browser-url {
+      margin-left: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .laptop-screen {
+      flex: 1;
+      background: linear-gradient(135deg, #090e1a, #0d1627);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .portfolio-hero-text {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .portfolio-sub {
+      font-size: 11px;
+      color: var(--cyan);
+      margin-top: 4px;
+    }
+
+    /* Mobile Phone Mockup */
+    .phone-frame {
+      width: 140px;
+      height: 270px;
+      background: #090e1a;
+      border: 3px solid #38bdf8;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(56, 189, 248, 0.35);
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 50px;
+      height: 10px;
+      background: #000;
+      border-radius: 10px;
+      margin: 0 auto 6px;
+    }
+
+    /* SCENE 4: SPRINT (0:10 - 0:20) */
+    .sprint-container {
+      width: 100%;
+      max-width: 850px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .sprint-step {
+      display: none;
+      width: 100%;
+      animation: sprintIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .sprint-step.current {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    @keyframes sprintIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .sprint-card {
+      background: rgba(13, 19, 32, 0.9);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+    }
+    .sprint-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(0, 245, 255, 0.1);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .sprint-card h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3.2vw, 32px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .sprint-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* SCENE 5: SOCIAL PROOF / METRICS (0:20 - 0:25) */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 860px;
+      width: 100%;
+    }
+    .aspect-9-16 .metrics-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .metric-box {
+      background: rgba(13, 19, 32, 0.85);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 14px;
+      padding: 20px 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .metric-box.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .metric-val {
+      font-family: var(--font-mono);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: var(--emerald);
+      text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+      margin-bottom: 6px;
+    }
+    .metric-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e8f0;
+      letter-spacing: 0.05em;
+    }
+
+    /* SCENE 6: OUTRO & CTA (0:25 - 0:30) */
+    .outro-seal {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.6));
+    }
+    .outro-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 46px);
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .outro-sub {
+      font-size: 14px;
+      color: var(--cyan);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .outro-url {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: #05080f;
+      background: var(--cyan);
+      padding: 10px 24px;
+      border-radius: 9999px;
+      box-shadow: 0 0 30px var(--cyan-glow);
+      display: inline-block;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    /* VOICE-OVER / CAPTION BAR (BOTTOM) */
+    .caption-ticker {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      padding: 8px 22px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+      z-index: 80;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .aspect-9-16 .caption-ticker {
+      bottom: 19%; /* positioned safely above Reels UI */
+      font-size: 12px;
+      padding: 6px 16px;
+      max-width: 85%;
+      white-space: normal;
+      text-align: center;
+    }
+
+    /* Studio Bottom Scrub & Info Bar */
+    .studio-scrub-bar {
+      width: 100%;
+      max-width: 1200px;
+      background: rgba(13, 19, 32, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 14px 20px;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .scrub-timeline {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+    .scrub-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #0077FF, #00F5FF);
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.7);
+    }
+    .scrub-markers {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+    .marker {
+      width: 2px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .marker.drop {
+      background: #00F5FF;
+      box-shadow: 0 0 8px #00F5FF;
+    }
+    .scrub-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .beat-counter {
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    /* Math Spec Card */
+    .spec-drawer {
+      width: 100%;
+      max-width: 1200px;
+      background: rgba(10, 15, 26, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .spec-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--cyan);
+    }
+    .spec-title {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP STUDIO CONTROL BAR -->
+  <header class="studio-header">
+    <div class="brand-mark">
+      <div class="brand-badge">K</div>
+      <div>
+        <div class="brand-title">KAIZEN SOFTWARE AGENCY</div>
+        <div class="brand-sub">30s Tech Launch Ad · Dual-Aspect Master</div>
+      </div>
+    </div>
+
+    <div class="controls-group">
+      <button id="btnPlay" class="btn btn-play" title="Spacebar to toggle play/pause">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span>Play Promo (124 BPM)</span>
+      </button>
+
+      <button id="btnRestart" class="btn" title="Press R to restart">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        <span>Restart</span>
+      </button>
+
+      <!-- Aspect Switcher -->
+      <div style="display: flex; gap: 4px; background: rgba(0,0,0,0.4); padding: 3px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+        <button id="btn16x9" class="btn active" style="padding: 6px 12px; font-size: 12px;">16:9 Landscape</button>
+        <button id="btn9x16" class="btn" style="padding: 6px 12px; font-size: 12px;">9:16 Vertical Reel</button>
+      </div>
+
+      <button id="btnSafeZone" class="btn" title="Toggle IG/TikTok Safe Zones">
+        <span>Safe Zones</span>
+      </button>
+
+      <!-- Voiceover Toggle -->
+      <button id="btnVoiceover" class="btn active" title="Toggle Spoken Voiceover Narration (V)">
+        <span id="voiceIcon">🎙️ Voiceover: ON</span>
+      </button>
+
+      <button id="btnAudioMute" class="btn" title="Toggle Audio (M)">
+        <span id="audioIcon">🔊 Sound ON</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN AD STAGE -->
+  <main class="stage-wrapper">
+    <div id="adViewport" class="ad-viewport aspect-16-9">
+      <div class="ad-canvas">
+        
+        <!-- Ambient Atmosphere -->
+        <div class="ambient-glow glow-cyan"></div>
+        <div class="ambient-glow glow-blue"></div>
+        <div class="tech-grid"></div>
+
+        <!-- Flash Bang for the Drop (at 0:05.5) -->
+        <div id="flashBang" class="flash-bang"></div>
+
+        <!-- 9:16 Safe Zone Overlays -->
+        <div id="safeZoneOverlay" class="safe-zone-overlay">
+          <div class="sz-top">TOP SAFE ZONE (Avatar & Status Bar)</div>
+          <div class="sz-bottom">BOTTOM SAFE ZONE (Captions & Audio Track)</div>
+          <div class="sz-right">REELS ACTIONS (Like, Share, Sound)</div>
+        </div>
+
+        <!-- =================== SCENES =================== -->
+
+        <!-- SCENE 1: THE HOOK (0:00 - 0:03) -->
+        <div id="scene1" class="scene active">
+          <div class="hook-badge">KAIZEN · THE CORE QUESTION</div>
+          <h1 class="hook-headline">
+            Why Does Your Business <span class="accent">Need a Bespoke Portfolio?</span>
+          </h1>
+          <p style="font-size: 15px; color: #94a3b8; margin-top: 12px; max-width: 650px;">
+            Because without proof, you're invisible. A portfolio isn't just a website—it's your 24/7 digital closer.
+          </p>
+        </div>
+
+        <!-- SCENE 2: THE TEASE / WHY NO PORTFOLIO HURTS (0:03 - 0:06) -->
+        <div id="scene2" class="scene">
+          <div class="hook-badge" style="border-color: rgba(239, 68, 68, 0.4); color: #f87171; background: rgba(239, 68, 68, 0.1);">
+            THE COST OF HAVING NO PROOF
+          </div>
+          <div class="problem-grid">
+            <div class="problem-card">
+              <div class="problem-tag">NO AUTHORITY</div>
+              <h3>Lost to Competitors</h3>
+              <p>75% of clients judge credibility on web presence. Without proof, they choose your rival.</p>
+            </div>
+            <div class="problem-card">
+              <div class="problem-tag">NO CONVERSION</div>
+              <h3>Templates Kill Trust</h3>
+              <p>Cookie-cutter sites look amateur and prevent you from charging premium rates.</p>
+            </div>
+            <div class="problem-card">
+              <div class="problem-tag">MANUAL DRAG</div>
+              <h3>Chasing Customers</h3>
+              <p>Wasting hours explaining basic prices instead of an automated booking system.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENE 3: THE DROP & 3D REVEAL (0:06 - 0:10) -->
+        <div id="scene3" class="scene">
+          <div class="reveal-stage">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: #00F5FF; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.15em;">
+              THE SOLUTION · YOUR 24/7 DIGITAL ASSET
+            </div>
+            <div class="mockup-3d-wrap">
+              <!-- Glass Laptop Frame -->
+              <div class="laptop-frame">
+                <div class="laptop-bar">
+                  <div class="dot dot-r"></div>
+                  <div class="dot dot-y"></div>
+                  <div class="dot dot-g"></div>
+                  <div class="browser-url">https://mohammed-suhail.vercel.app</div>
+                </div>
+                <div class="laptop-screen">
+                  <div>
+                    <div style="font-size: 10px; color: #00F5FF; font-family: var(--font-mono); font-weight: 700;">
+                      MOHAMMED SUHAIL · LEAD SOLUTIONS ARCHITECT
+                    </div>
+                    <div class="portfolio-hero-text">
+                      High-Impact Engineering.<br>Zero Fluff.
+                    </div>
+                  </div>
+                  <div style="display: flex; gap: 8px;">
+                    <span style="font-size: 9px; background: rgba(0, 245, 255, 0.15); border: 1px solid #00F5FF; padding: 2px 6px; border-radius: 4px; color: #00F5FF;">
+                      Fast Deployment
+                    </span>
+                    <span style="font-size: 9px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; padding: 2px 6px; border-radius: 4px; color: #10B981;">
+                      Bespoke Architecture
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Smartphone Frame -->
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div style="text-align: left; padding: 4px;">
+                  <div style="font-size: 11px; font-weight: 800; color: #fff;">0Queue App</div>
+                  <div style="font-size: 8px; color: var(--cyan); margin-top: 2px;">Instant Mobile Booking</div>
+                  <div style="margin-top: 14px; background: rgba(0,245,255,0.1); border-radius: 6px; padding: 6px;">
+                    <div style="font-size: 8px; color: #94a3b8;">Active Token</div>
+                    <div style="font-size: 16px; font-weight: 800; color: #00F5FF; font-family: var(--font-mono);">#A-42</div>
+                  </div>
+                </div>
+                <div style="font-size: 8px; color: #10b981; font-weight: 700;">● Confirmed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENE 4: SPRINT (0:10 - 0:20) -->
+        <div id="scene4" class="scene">
+          <div class="sprint-container">
+            <!-- Sprint Step 1 (0:10 - 0:13.3) -->
+            <div id="sprintStep1" class="sprint-step current">
+              <div class="sprint-card">
+                <div class="sprint-badge">CAPABILITY 01 / 03 · OPERATIONS</div>
+                <h2>Turnkey Web Apps &amp; Booking</h2>
+                <p>Automated slot scheduling, digital QR menus, and queue engines that slash waiting room no-shows.</p>
+              </div>
+            </div>
+
+            <!-- Sprint Step 2 (0:13.3 - 0:16.6) -->
+            <div id="sprintStep2" class="sprint-step">
+              <div class="sprint-card" style="border-color: rgba(56, 189, 248, 0.4);">
+                <div class="sprint-badge" style="color: #38bdf8; border-color: #38bdf8;">CAPABILITY 02 / 03 · INTELLIGENCE</div>
+                <h2>Autonomous AI Agents &amp; RAG</h2>
+                <p>Knowledge-grounded sales consultants and automated WhatsApp bots answering client inquiries 24/7.</p>
+              </div>
+            </div>
+
+            <!-- Sprint Step 3 (0:16.6 - 0:20) -->
+            <div id="sprintStep3" class="sprint-step">
+              <div class="sprint-card" style="border-color: rgba(16, 185, 129, 0.4);">
+                <div class="sprint-badge" style="color: #10b981; border-color: #10b981;">CAPABILITY 03 / 03 · CONVERSION</div>
+                <h2>High-Converting Custom Portals</h2>
+                <p>100% bespoke responsive layouts engineered for peak smartphone conversion and lightning speed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENE 5: SOCIAL PROOF / METRICS (0:20 - 0:25) -->
+        <div id="scene5" class="scene">
+          <div class="hook-badge" style="border-color: rgba(16, 185, 129, 0.4); color: var(--emerald);">
+            THE KAIZEN COMMERCIAL GUARANTEE
+          </div>
+          <div class="metrics-grid">
+            <div id="metricBox1" class="metric-box">
+              <div class="metric-val">100%</div>
+              <div class="metric-label">Code &amp; Asset Ownership</div>
+            </div>
+            <div id="metricBox2" class="metric-box">
+              <div class="metric-val">ZERO</div>
+              <div class="metric-label">Monthly Software Bloat</div>
+            </div>
+            <div id="metricBox3" class="metric-box">
+              <div class="metric-val">3–5 DAYS</div>
+              <div class="metric-label">Rapid Turnaround Delivery</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENE 6: OUTRO & CTA (0:25 - 0:30) -->
+        <div id="scene6" class="scene">
+          <!-- Official K Logo Seal -->
+          <svg class="outro-seal" viewBox="0 0 160 160">
+            <rect x="8" y="8" width="144" height="144" rx="28" fill="#070C14" stroke="#00F5FF" stroke-width="4"/>
+            <rect x="14" y="14" width="132" height="132" rx="22" fill="none" stroke="rgba(0, 245, 255, 0.4)" stroke-width="1.5"/>
+            <g transform="translate(20, 20)">
+              <path d="M 22 15 L 42 15 L 42 105 L 22 105 Z" fill="#FFFFFF"/>
+              <path d="M 22 56 L 88 15 L 105 15 L 38 67 Z" fill="#00F5FF"/>
+              <path d="M 42 66 L 98 105 L 76 105 L 32 73 Z" fill="#FFFFFF"/>
+            </g>
+          </svg>
+
+          <div class="outro-title">KAIZEN SOFTWARE AGENCY</div>
+          <div class="outro-sub">IDEAS TODAY, A BETTER TOMORROW.</div>
+          
+          <a href="https://mohammed-suhail.vercel.app" target="_blank" class="outro-url">
+            mohammed-suhail.vercel.app →
+          </a>
+        </div>
+
+        <!-- DYNAMIC VOICE-OVER CAPTION TICKER -->
+        <div id="captionTicker" class="caption-ticker">
+          "Most agencies build templates."
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- BOTTOM SCRUBBER & RUNTIME STATS -->
+  <footer class="studio-scrub-bar">
+    <div id="scrubTimeline" class="scrub-timeline">
+      <div id="scrubProgress" class="scrub-progress"></div>
+      <div class="scrub-markers">
+        <div class="marker" style="left: 0%;"></div>
+        <div class="marker" style="left: 10%;"></div>
+        <div class="marker drop" style="left: 18.3%;" title="Beat Drop (0:05.5)"></div>
+        <div class="marker" style="left: 33.3%;"></div>
+        <div class="marker" style="left: 66.6%;"></div>
+        <div class="marker" style="left: 83.3%;"></div>
+        <div class="marker" style="left: 100%;"></div>
+      </div>
+    </div>
+
+    <div class="scrub-meta">
+      <div>
+        Time: <span id="timeDisplay" style="color: #fff; font-weight: 700;">00:00.0</span> / 00:30.0
+        &nbsp;|&nbsp;
+        Frame: <span id="frameDisplay" style="color: #fff; font-weight: 700;">000</span> / 900 (@30fps)
+      </div>
+      <div>
+        Tempo: <span class="beat-counter">124 BPM</span>
+        &nbsp;|&nbsp;
+        Current Beat: <span id="beatDisplay" class="beat-counter">Bar 1.1</span>
+      </div>
+      <div>
+        Status: <span id="statusDisplay" style="color: #10b981; font-weight: 700;">READY</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BEAT-SYNC SPECIFICATIONS DRAWER -->
+  <section class="spec-drawer">
+    <div style="font-weight: 700; color: #fff; font-size: 14px;">
+      📐 BEAT-SYNC &amp; AUDIO DESIGN SPECIFICATIONS (124 BPM GRID)
+    </div>
+    <div class="spec-grid">
+      <div class="spec-item">
+        <div class="spec-title">BPM &amp; Frame Mathematics</div>
+        <div>• 124 BPM = 483.87 ms per beat</div>
+        <div>• Frames/beat @ 30fps = 14.52 frames</div>
+        <div>• 1 Musical Bar (4 beats) = 58.06 frames (1.935s)</div>
+        <div>• Total Duration: 30.0s = 900 frames = 62 beats</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-title">Sound Synthesis Engine (Web Audio)</div>
+        <div>• 0:00–0:05: Tension sub-bass riser + bandpass noise sweep</div>
+        <div>• 0:05.5: Heavy 808 sub-drop + crystal shimmer chime</div>
+        <div>• 0:06–0:20: Minimal-tech 124 BPM bass groove + tactile UI clicks</div>
+        <div>• 0:25–0:30: Resonant Japanese temple bowl (432Hz) with 5s decay</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-title">Dual-Aspect Safe Zones</div>
+        <div>• 16:9 Landscape (1920×1080): Center 90% content safe zone</div>
+        <div>• 9:16 Vertical Reel (1080×1920): Center 70% safe zone</div>
+        <div>• Protected from IG/TikTok status headers and engagement buttons</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= JAVASCRIPT RUNTIME ================= -->
+  <script>
+    (function() {
+      // -------------------------------------------------------------
+      // 1. TIMELINE & AUDIO CONSTANTS
+      // -------------------------------------------------------------
+      const DURATION = 30.0; // 30 seconds
+      const FPS = 30;
+      const TOTAL_FRAMES = DURATION * FPS; // 900 frames
+      const BPM = 124;
+      const BEAT_DURATION = 60 / BPM; // ~0.48387s
+      const BAR_DURATION = BEAT_DURATION * 4; // ~1.9355s
+      const DROP_TIME = 5.5; // Beat drop at 0:05.5
+
+      let isPlaying = false;
+      let currentTime = 0;
+      let isMuted = false;
+      let animFrameId = null;
+      let lastTimestamp = null;
+      let audioCtx = null;
+      let masterGain = null;
+
+      // DOM Elements
+      const btnPlay = document.getElementById('btnPlay');
+      const btnRestart = document.getElementById('btnRestart');
+      const btn16x9 = document.getElementById('btn16x9');
+      const btn9x16 = document.getElementById('btn9x16');
+      const btnSafeZone = document.getElementById('btnSafeZone');
+      const btnVoiceover = document.getElementById('btnVoiceover');
+      const voiceIcon = document.getElementById('voiceIcon');
+      const btnAudioMute = document.getElementById('btnAudioMute');
+      const audioIcon = document.getElementById('audioIcon');
+      const adViewport = document.getElementById('adViewport');
+      const safeZoneOverlay = document.getElementById('safeZoneOverlay');
+      const scrubTimeline = document.getElementById('scrubTimeline');
+      const scrubProgress = document.getElementById('scrubProgress');
+      const timeDisplay = document.getElementById('timeDisplay');
+      const frameDisplay = document.getElementById('frameDisplay');
+      const beatDisplay = document.getElementById('beatDisplay');
+      const statusDisplay = document.getElementById('statusDisplay');
+      const flashBang = document.getElementById('flashBang');
+      const captionTicker = document.getElementById('captionTicker');
+
+      let isVoiceoverEnabled = true;
+      let preferredVoice = null;
+
+      // Initialize Natural Speech Voices
+      function loadVoices() {
+        if ('speechSynthesis' in window) {
+          const voices = window.speechSynthesis.getVoices();
+          // Find natural sounding English voice
+          preferredVoice = voices.find(v => (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Premium')) && v.lang.startsWith('en'))
+                        || voices.find(v => v.lang.startsWith('en-US'))
+                        || voices.find(v => v.lang.startsWith('en'))
+                        || voices[0];
+        }
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+        loadVoices();
+      }
+
+      function speakVoiceover(text, rate = 1.05) {
+        if (!('speechSynthesis' in window) || !isVoiceoverEnabled || isMuted) return;
+        try {
+          window.speechSynthesis.cancel();
+          const utt = new SpeechSynthesisUtterance(text);
+          if (preferredVoice) utt.voice = preferredVoice;
+          utt.rate = rate;
+          utt.pitch = 0.98;
+
+          // Sidechain audio ducking on BGM while voice speaks
+          if (audioCtx && masterGain && !isMuted) {
+            masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+            masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
+            masterGain.gain.linearRampToValueAtTime(0.25, audioCtx.currentTime + 0.08);
+          }
+
+          utt.onend = () => {
+            if (audioCtx && masterGain && !isMuted) {
+              masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+              masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
+              masterGain.gain.linearRampToValueAtTime(0.85, audioCtx.currentTime + 0.25);
+            }
+          };
+
+          utt.onerror = () => {
+            if (audioCtx && masterGain && !isMuted) {
+              masterGain.gain.linearRampToValueAtTime(0.85, audioCtx.currentTime + 0.1);
+            }
+          };
+
+          window.speechSynthesis.speak(utt);
+        } catch (e) {
+          console.warn('SpeechSynthesis error:', e);
+        }
+      }
+
+      // Scenes
+      const scenes = [
+        document.getElementById('scene1'),
+        document.getElementById('scene2'),
+        document.getElementById('scene3'),
+        document.getElementById('scene4'),
+        document.getElementById('scene5'),
+        document.getElementById('scene6')
+      ];
+
+      // Sprint Steps
+      const sprintSteps = [
+        document.getElementById('sprintStep1'),
+        document.getElementById('sprintStep2'),
+        document.getElementById('sprintStep3')
+      ];
+
+      // Metric Boxes
+      const metricBoxes = [
+        document.getElementById('metricBox1'),
+        document.getElementById('metricBox2'),
+        document.getElementById('metricBox3')
+      ];
+
+      // -------------------------------------------------------------
+      // 2. WEB AUDIO API SYNTHESIS ENGINE (124 BPM STUDIO TRACK & SFX)
+      // -------------------------------------------------------------
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContextClass();
+          masterGain = audioCtx.createGain();
+          masterGain.gain.setValueAtTime(0.85, audioCtx.currentTime);
+          
+          // Compressor/limiter to prevent any distortion
+          const limiter = audioCtx.createDynamicsCompressor();
+          limiter.threshold.setValueAtTime(-2.0, audioCtx.currentTime);
+          limiter.knee.setValueAtTime(4, audioCtx.currentTime);
+          limiter.ratio.setValueAtTime(12, audioCtx.currentTime);
+          limiter.attack.setValueAtTime(0.003, audioCtx.currentTime);
+          limiter.release.setValueAtTime(0.15, audioCtx.currentTime);
+
+          masterGain.connect(limiter);
+          limiter.connect(audioCtx.destination);
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      // Track synthesized events to avoid duplicate triggers while scrubbing
+      const triggeredSFX = new Set();
+
+      function triggerSubRiser(t) {
+        if (!audioCtx || isMuted) return;
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(35, now);
+        osc.frequency.exponentialRampToValueAtTime(130, now + 4.8);
+
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.35, now + 4.8);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 5.2);
+
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start(now);
+        osc.stop(now + 5.3);
+      }
+
+      function triggerTheDrop(t) {
+        if (!audioCtx || isMuted) return;
+        const now = audioCtx.currentTime;
+
+        // 1. Heavy Sub Kick Hit
+        const kickOsc = audioCtx.createOscillator();
+        const kickGain = audioCtx.createGain();
+        kickOsc.type = 'sine';
+        kickOsc.frequency.setValueAtTime(160, now);
+        kickOsc.frequency.exponentialRampToValueAtTime(38, now + 0.35);
+
+        kickGain.gain.setValueAtTime(0.9, now);
+        kickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+
+        kickOsc.connect(kickGain);
+        kickGain.connect(masterGain);
+        kickOsc.start(now);
+        kickOsc.stop(now + 0.65);
+
+        // 2. Crystal Chime Harmonic Shimmer
+        [1760, 2640, 3520].forEach((freq, idx) => {
+          const chimeOsc = audioCtx.createOscillator();
+          const chimeGain = audioCtx.createGain();
+          chimeOsc.type = 'triangle';
+          chimeOsc.frequency.setValueAtTime(freq, now);
+
+          chimeGain.gain.setValueAtTime(0.12 / (idx + 1), now);
+          chimeGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+
+          chimeOsc.connect(chimeGain);
+          chimeGain.connect(masterGain);
+          chimeOsc.start(now);
+          chimeOsc.stop(now + 1.25);
+        });
+      }
+
+      function triggerClickSFX() {
+        if (!audioCtx || isMuted) return;
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(2800, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.04);
+
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start(now);
+        osc.stop(now + 0.045);
+      }
+
+      function triggerHarmonicChord(noteIndex) {
+        if (!audioCtx || isMuted) return;
+        const now = audioCtx.currentTime;
+        const chordFrequencies = [
+          [220, 277.18, 329.63], // A chord
+          [246.94, 311.13, 369.99], // B chord
+          [293.66, 369.99, 440.00]  // D chord
+        ];
+        const freqs = chordFrequencies[noteIndex % 3];
+        freqs.forEach(f => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(f, now);
+
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(now);
+          osc.stop(now + 0.95);
+        });
+      }
+
+      function triggerSingingBowl() {
+        if (!audioCtx || isMuted) return;
+        const now = audioCtx.currentTime;
+        // Resonant harmonic singing bowl (fundamental ~432Hz + overtones)
+        const partials = [
+          { f: 432, g: 0.35, d: 4.8 },
+          { f: 864, g: 0.18, d: 3.8 },
+          { f: 1296, g: 0.09, d: 2.8 },
+          { f: 2160, g: 0.04, d: 1.8 }
+        ];
+
+        partials.forEach(p => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(p.f, now);
+
+          gain.gain.setValueAtTime(p.g, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + p.d);
+
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(now);
+          osc.stop(now + p.d + 0.1);
+        });
+      }
+
+      // Minimal-tech Bassline Beat Engine (124 BPM)
+      let nextBeatTime = 0;
+      function scheduleGroove(t) {
+        if (!audioCtx || isMuted) return;
+        if (t < DROP_TIME || t > 24.5) return;
+
+        const beatIndex = Math.floor((t - DROP_TIME) / BEAT_DURATION);
+        const beatKey = `beat_${beatIndex}`;
+        if (!triggeredSFX.has(beatKey)) {
+          triggeredSFX.add(beatKey);
+          
+          const now = audioCtx.currentTime;
+          // Kick on every beat
+          const kick = audioCtx.createOscillator();
+          const kGain = audioCtx.createGain();
+          kick.type = 'sine';
+          kick.frequency.setValueAtTime(120, now);
+          kick.frequency.exponentialRampToValueAtTime(45, now + 0.15);
+          kGain.gain.setValueAtTime(0.4, now);
+          kGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+          kick.connect(kGain);
+          kGain.connect(masterGain);
+          kick.start(now);
+          kick.stop(now + 0.22);
+
+          // Bass Note (minimal-tech root groove)
+          const bassNotes = [55, 55, 65.41, 73.42]; // A1, A1, C2, D2
+          const bOsc = audioCtx.createOscillator();
+          const bGain = audioCtx.createGain();
+          bOsc.type = 'sawtooth';
+          bOsc.frequency.setValueAtTime(bassNotes[beatIndex % 4], now);
+
+          // Filter
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(450, now);
+
+          bGain.gain.setValueAtTime(0.18, now);
+          bGain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+          bOsc.connect(filter);
+          filter.connect(bGain);
+          bGain.connect(masterGain);
+          bOsc.start(now);
+          bOsc.stop(now + 0.38);
+        }
+      }
+
+      // -------------------------------------------------------------
+      // 3. FRAME-ACCURATE TIMELINE STATE MACHINE (0:00 - 0:30)
+      // -------------------------------------------------------------
+      function renderFrame(t) {
+        // Timeline bounds check
+        if (t >= DURATION) {
+          pausePromo();
+          currentTime = DURATION;
+          updateDisplays(DURATION);
+          return;
+        }
+
+        updateDisplays(t);
+
+        // Sound Trigger Logic
+        if (t >= 0.1 && !triggeredSFX.has('sub_riser')) {
+          triggeredSFX.add('sub_riser');
+          triggerSubRiser(t);
+        }
+
+        if (t >= DROP_TIME && !triggeredSFX.has('the_drop')) {
+          triggeredSFX.add('the_drop');
+          triggerTheDrop(t);
+          
+          // Visual Flash Bang
+          flashBang.classList.add('bang');
+          setTimeout(() => flashBang.classList.remove('bang'), 280);
+        }
+
+        // Active Groove
+        scheduleGroove(t);
+
+        // UI Click Transients in Sprint
+        if (t >= 10.0 && t < 10.2 && !triggeredSFX.has('click1')) {
+          triggeredSFX.add('click1');
+          triggerClickSFX();
+        }
+        if (t >= 13.3 && t < 13.5 && !triggeredSFX.has('click2')) {
+          triggeredSFX.add('click2');
+          triggerClickSFX();
+        }
+        if (t >= 16.6 && t < 16.8 && !triggeredSFX.has('click3')) {
+          triggeredSFX.add('click3');
+          triggerClickSFX();
+        }
+
+        // Social Proof Harmonic Chords
+        if (t >= 20.3 && t < 20.5 && !triggeredSFX.has('chord1')) {
+          triggeredSFX.add('chord1');
+          triggerHarmonicChord(0);
+        }
+        if (t >= 21.6 && t < 21.8 && !triggeredSFX.has('chord2')) {
+          triggeredSFX.add('chord2');
+          triggerHarmonicChord(1);
+        }
+        if (t >= 23.0 && t < 23.2 && !triggeredSFX.has('chord3')) {
+          triggeredSFX.add('chord3');
+          triggerHarmonicChord(2);
+        }
+
+        // Outro Zen Singing Bowl
+        if (t >= 25.1 && !triggeredSFX.has('singing_bowl')) {
+          triggeredSFX.add('singing_bowl');
+          triggerSingingBowl();
+        }
+
+        // SPOKEN VOICEOVER NARRATION (Explaining Why You Need A Portfolio)
+        if (t >= 0.1 && !triggeredSFX.has('vo_0')) {
+          triggeredSFX.add('vo_0');
+          speakVoiceover("Most agencies sell generic templates. But why does your business actually need a bespoke portfolio?");
+        }
+        if (t >= 3.2 && !triggeredSFX.has('vo_1')) {
+          triggeredSFX.add('vo_1');
+          speakVoiceover("Because without proof, you are invisible. Generic templates cost you clients every single day.");
+        }
+        if (t >= 5.8 && !triggeredSFX.has('vo_2')) {
+          triggeredSFX.add('vo_2');
+          speakVoiceover("A custom portfolio is your twenty-four-seven sales closer. It commands instant authority.");
+        }
+        if (t >= 10.2 && !triggeredSFX.has('vo_3')) {
+          triggeredSFX.add('vo_3');
+          speakVoiceover("Turnkey web apps with automated booking that eliminate manual chaos.");
+        }
+        if (t >= 13.5 && !triggeredSFX.has('vo_4')) {
+          triggeredSFX.add('vo_4');
+          speakVoiceover("Autonomous AI sales agents answering client questions around the clock.");
+        }
+        if (t >= 16.8 && !triggeredSFX.has('vo_5')) {
+          triggeredSFX.add('vo_5');
+          speakVoiceover("Bespoke portals engineered for lightning speed and conversion.");
+        }
+        if (t >= 20.3 && !triggeredSFX.has('vo_6')) {
+          triggeredSFX.add('vo_6');
+          speakVoiceover("One hundred percent code ownership. Zero monthly software bloat. Delivered in days.");
+        }
+        if (t >= 25.2 && !triggeredSFX.has('vo_7')) {
+          triggeredSFX.add('vo_7');
+          speakVoiceover("Stop losing deals to subpar competitors. Build your vision with Kaizen. Link in bio.");
+        }
+
+        // SCENE VISIBILITY MAPPING
+        // 0:00 - 0:03 -> Scene 1
+        // 0:03 - 0:06 -> Scene 2
+        // 0:06 - 0:10 -> Scene 3
+        // 0:10 - 0:20 -> Scene 4 (Sprint)
+        // 0:20 - 0:25 -> Scene 5 (Metrics)
+        // 0:25 - 0:30 -> Scene 6 (Outro)
+        let activeSceneIdx = 0;
+        if (t < 3.0) activeSceneIdx = 0;
+        else if (t < 6.0) activeSceneIdx = 1;
+        else if (t < 10.0) activeSceneIdx = 2;
+        else if (t < 20.0) activeSceneIdx = 3;
+        else if (t < 25.0) activeSceneIdx = 4;
+        else activeSceneIdx = 5;
+
+        scenes.forEach((sc, idx) => {
+          if (idx === activeSceneIdx) sc.classList.add('active');
+          else sc.classList.remove('active');
+        });
+
+        // Sprint sub-steps
+        if (activeSceneIdx === 3) {
+          let stepIdx = 0;
+          if (t < 13.3) stepIdx = 0;
+          else if (t < 16.6) stepIdx = 1;
+          else stepIdx = 2;
+
+          sprintSteps.forEach((st, idx) => {
+            if (idx === stepIdx) st.classList.add('current');
+            else st.classList.remove('current');
+          });
+        }
+
+        // Metrics Stagger
+        if (activeSceneIdx === 4) {
+          if (t >= 20.2) metricBoxes[0].classList.add('show');
+          if (t >= 21.5) metricBoxes[1].classList.add('show');
+          if (t >= 22.8) metricBoxes[2].classList.add('show');
+        } else {
+          metricBoxes.forEach(b => b.classList.remove('show'));
+        }
+
+        // Dynamic VO Captions (Why You Need a Portfolio)
+        if (t < 3.2) {
+          captionTicker.textContent = '"Most agencies sell templates. Why does your business need a bespoke portfolio?"';
+        } else if (t < 5.8) {
+          captionTicker.textContent = '"Without proof, you are invisible. Generic templates lose you clients."';
+        } else if (t < 10.2) {
+          captionTicker.textContent = '"A custom portfolio is your 24/7 digital closer. Instant authority."';
+        } else if (t < 13.5) {
+          captionTicker.textContent = '"Turnkey web apps & booking engines that eliminate manual chaos."';
+        } else if (t < 16.8) {
+          captionTicker.textContent = '"Autonomous 24/7 AI sales & support agents."';
+        } else if (t < 20.3) {
+          captionTicker.textContent = '"Bespoke portals engineered for lightning speed & conversion."';
+        } else if (t < 25.2) {
+          captionTicker.textContent = '"100% code ownership. Zero monthly bloat. Delivered in days."';
+        } else {
+          captionTicker.textContent = '"Build your vision with Kaizen. mohammed-suhail.vercel.app"';
+        }
+      }
+
+      function updateDisplays(t) {
+        // Scrubber progress
+        const pct = Math.min((t / DURATION) * 100, 100);
+        scrubProgress.style.width = pct + '%';
+
+        // Time display
+        const totalMs = Math.floor(t * 1000);
+        const mins = Math.floor(totalMs / 60000);
+        const secs = Math.floor((totalMs % 60000) / 1000);
+        const tenths = Math.floor((totalMs % 1000) / 100);
+        timeDisplay.textContent = 
+          `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}.${tenths}`;
+
+        // Frame number
+        const frameNum = Math.min(Math.floor(t * FPS), TOTAL_FRAMES);
+        frameDisplay.textContent = String(frameNum).padStart(3, '0');
+
+        // Beat counter
+        const currentBeatTotal = Math.floor(t / BEAT_DURATION);
+        const bar = Math.floor(currentBeatTotal / 4) + 1;
+        const beatInBar = (currentBeatTotal % 4) + 1;
+        beatDisplay.textContent = `Bar ${bar}.${beatInBar}`;
+      }
+
+      // -------------------------------------------------------------
+      // 4. ANIMATION LOOP CONTROLS
+      // -------------------------------------------------------------
+      function loop(timestamp) {
+        if (!lastTimestamp) lastTimestamp = timestamp;
+        const delta = (timestamp - lastTimestamp) / 1000;
+        lastTimestamp = timestamp;
+
+        if (isPlaying) {
+          currentTime += delta;
+          renderFrame(currentTime);
+          animFrameId = requestAnimationFrame(loop);
+        }
+      }
+
+      function playPromo() {
+        initAudio();
+        isPlaying = true;
+        statusDisplay.textContent = 'PLAYING (124 BPM)';
+        statusDisplay.style.color = '#00F5FF';
+        btnPlay.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+          <span>Pause Promo</span>
+        `;
+        lastTimestamp = null;
+        animFrameId = requestAnimationFrame(loop);
+      }
+
+      function pausePromo() {
+        isPlaying = false;
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        statusDisplay.textContent = 'PAUSED';
+        statusDisplay.style.color = '#f59e0b';
+        btnPlay.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>Play Promo</span>
+        `;
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+      }
+
+      function restartPromo() {
+        pausePromo();
+        currentTime = 0;
+        triggeredSFX.clear();
+        renderFrame(0);
+        playPromo();
+      }
+
+      // -------------------------------------------------------------
+      // 5. EVENT LISTENERS
+      // -------------------------------------------------------------
+      btnPlay.addEventListener('click', () => {
+        if (isPlaying) pausePromo();
+        else playPromo();
+      });
+
+      btnRestart.addEventListener('click', restartPromo);
+
+      // Aspect Switches
+      btn16x9.addEventListener('click', () => {
+        btn16x9.classList.add('active');
+        btn9x16.classList.remove('active');
+        adViewport.classList.remove('aspect-9-16');
+        adViewport.classList.add('aspect-16-9');
+      });
+
+      btn9x16.addEventListener('click', () => {
+        btn9x16.classList.add('active');
+        btn16x9.classList.remove('active');
+        adViewport.classList.remove('aspect-16-9');
+        adViewport.classList.add('aspect-9-16');
+      });
+
+      // Safe Zone Toggle
+      btnSafeZone.addEventListener('click', () => {
+        const isVis = safeZoneOverlay.classList.toggle('visible');
+        btnSafeZone.classList.toggle('active', isVis);
+      });
+
+      // Voiceover Speech Toggle
+      btnVoiceover.addEventListener('click', () => {
+        isVoiceoverEnabled = !isVoiceoverEnabled;
+        if (!isVoiceoverEnabled && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          if (audioCtx && masterGain && !isMuted) {
+            masterGain.gain.setValueAtTime(0.85, audioCtx.currentTime);
+          }
+        }
+        voiceIcon.textContent = isVoiceoverEnabled ? '🎙️ Voiceover: ON' : '🎙️ Voiceover: OFF';
+        btnVoiceover.classList.toggle('active', isVoiceoverEnabled);
+      });
+
+      // Audio Mute Toggle
+      btnAudioMute.addEventListener('click', () => {
+        isMuted = !isMuted;
+        if (masterGain) {
+          masterGain.gain.setValueAtTime(isMuted ? 0 : 0.85, audioCtx.currentTime);
+        }
+        audioIcon.textContent = isMuted ? '🔇 Sound MUTED' : '🔊 Sound ON';
+        btnAudioMute.classList.toggle('active', isMuted);
+      });
+
+      // Interactive Scrubber Click
+      scrubTimeline.addEventListener('click', (e) => {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        const rect = scrubTimeline.getBoundingClientRect();
+        const clickRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        currentTime = clickRatio * DURATION;
+        
+        // Re-align triggered sound set based on scrub location
+        triggeredSFX.clear();
+        if (currentTime > 0.1) triggeredSFX.add('sub_riser');
+        if (currentTime > DROP_TIME) triggeredSFX.add('the_drop');
+        if (currentTime > 25.1) triggeredSFX.add('singing_bowl');
+
+        renderFrame(currentTime);
+      });
+
+      // Global Keyboard Shortcuts
+      window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (isPlaying) pausePromo();
+          else playPromo();
+        } else if (e.key === 'r' || e.key === 'R') {
+          restartPromo();
+        } else if (e.key === 'm' || e.key === 'M') {
+          btnAudioMute.click();
+        } else if (e.key === 'v' || e.key === 'V') {
+          btnVoiceover.click();
+        } else if (e.key === 'a' || e.key === 'A') {
+          if (adViewport.classList.contains('aspect-16-9')) {
+            btn9x16.click();
+          } else {
+            btn16x9.click();
+          }
+        } else if (e.key === 's' || e.key === 'S') {
+          btnSafeZone.click();
+        }
+      });
+
+      // Initial Render
+      renderFrame(0);
+    })();
+  </script>
+</body>
+</html>

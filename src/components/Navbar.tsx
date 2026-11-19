@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { animate, stagger, cubicBezier } from 'animejs';
-import { X, MessageSquare, ArrowUpRight, Calculator } from 'lucide-react';
+import { X, MessageSquare, ArrowUpRight, Calculator, Play } from 'lucide-react';
 import { KaizenLogo } from './KaizenLogo';
 import { getWhatsAppUrl, handleWhatsAppInstantClick } from '../data/agencyData';
 
@@ -8,9 +8,10 @@ interface NavbarProps {
   activeSection: string;
   onNavigate: (sectionId: string) => void;
   onOpenEstimator?: () => void;
+  onOpenPromoAd?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenEstimator }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpenEstimator, onOpenPromoAd }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuNavRef = useRef<HTMLDivElement>(null);
 
@@ -87,6 +88,17 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate, onOpe
 
         {/* Top Right: Direct Quick Action Triggers */}
         <div className="flex items-center gap-3 pointer-events-auto">
+          {onOpenPromoAd && (
+            <button
+              onClick={onOpenPromoAd}
+              className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-none bg-cyan-950/40 hover:bg-cyan-900/40 border border-cyan-500/40 hover:border-cyan-400 text-xs font-mono text-cyan-300 hover:text-white transition-[background-color,border-color,transform] duration-150 active:scale-95 cursor-pointer shadow-[0_0_12px_rgba(0,245,255,0.15)]"
+              aria-label="Watch 30s Promo Ad"
+            >
+              <Play className="w-3 h-3 fill-cyan-400 text-cyan-400" />
+              <span>30s Promo Ad</span>
+            </button>
+          )}
+
           {onOpenEstimator && (
             <button
               onClick={onOpenEstimator}
