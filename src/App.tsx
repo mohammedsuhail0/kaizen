@@ -10,12 +10,10 @@ import { TrustSection } from './components/TrustSection';
 import { MobileView } from './components/mobile/MobileView';
 import { ChatDrawer } from './components/ChatDrawer';
 import { ChatLauncher } from './components/ChatLauncher';
-import { PromoAdModal } from './components/PromoAdModal';
 
 export function App() {
   const [isPreloading, setIsPreloading] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [isPromoOpen, setIsPromoOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>(() => {
     const hash = window.location.hash.replace('#', '').toLowerCase();
     if (['hero', 'services', 'bundles', 'demos', 'quotation'].includes(hash)) {
@@ -92,7 +90,6 @@ export function App() {
           activeSection={activeSection}
           onNavigate={(id) => navigateTo(id)}
           onOpenEstimator={() => navigateTo('quotation')}
-          onOpenPromoAd={() => setIsPromoOpen(true)}
         />
 
         {/* Central View Stage (Strict max-w-7xl, breathing gutters, clean header clearance) */}
@@ -103,7 +100,6 @@ export function App() {
                 onExploreServices={() => navigateTo('services')}
                 onOpenQuotation={() => navigateTo('quotation')}
                 onExploreDemos={() => navigateTo('demos')}
-                onOpenPromoAd={() => setIsPromoOpen(true)}
               />
             )}
 
@@ -144,12 +140,6 @@ export function App() {
       <ChatDrawer
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
-      />
-
-      {/* 5. 30s Showcase Promo Ad Cinematic Modal */}
-      <PromoAdModal
-        isOpen={isPromoOpen}
-        onClose={() => setIsPromoOpen(false)}
       />
     </div>
   );

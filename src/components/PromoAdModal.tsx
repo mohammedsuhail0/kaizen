@@ -18,8 +18,8 @@ export const PromoAdModal: React.FC<PromoAdModalProps> = ({ isOpen, onClose }) =
         {/* Modal Header */}
         <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#0c1220]/80">
           <div className="flex items-center gap-3">
-            <span className="font-mono font-bold text-cyan-400 text-sm bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded">
-              K
+            <span className="font-serif font-black text-cyan-400 text-sm bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded">
+              改善
             </span>
             <div>
               <div className="text-white text-sm font-bold tracking-wide">

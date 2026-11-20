@@ -1,20 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import { animate, stagger, cubicBezier } from 'animejs';
-import { ArrowRight, MessageSquare, Play } from 'lucide-react';
+import { ArrowRight, MessageSquare } from 'lucide-react';
 import { getWhatsAppUrl, handleWhatsAppInstantClick, AGENCY_CONFIG } from '../data/agencyData';
 
 interface HeroSectionProps {
   onExploreServices: () => void;
   onOpenQuotation: () => void;
   onExploreDemos: () => void;
-  onOpenPromoAd?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onExploreServices,
   onOpenQuotation,
   onExploreDemos,
-  onOpenPromoAd,
 }) => {
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -82,18 +80,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <span>Get Instant Quotation</span>
           <ArrowRight className="w-4 h-4" />
         </button>
-
-        {/* 30s Promo Ad Button */}
-        {onOpenPromoAd && (
-          <button
-            onClick={onOpenPromoAd}
-            className="btn-secondary text-cyan-400 hover:text-cyan-300 border-cyan-500/40 hover:border-cyan-400 bg-cyan-950/20 shadow-[0_0_15px_rgba(0,245,255,0.15)] flex items-center gap-2"
-            aria-label="Watch 30s Showcase Promo Ad"
-          >
-            <Play className="w-3.5 h-3.5 fill-cyan-400" />
-            <span>Watch 30s Promo Ad</span>
-          </button>
-        )}
 
         {/* Visually Secondary Action Buttons */}
         <button

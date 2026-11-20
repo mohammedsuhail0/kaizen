@@ -8,7 +8,7 @@
   <!-- Google Fonts: Luxury Editorial Serif + Technical Sans + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -31,6 +31,7 @@
       --font-display: 'Cinzel', serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', Consolas, monospace;
+      --font-jp: 'Noto Serif JP', serif;
     }
 
     * {
@@ -175,11 +176,15 @@
       width: 40px;
       height: 40px;
       border: 1.5px solid var(--cyan-core);
-      border-radius: 8px;
+      border-radius: 6px;
       background: rgba(0, 245, 255, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: var(--font-jp);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--cyan-core);
       box-shadow: 0 0 14px rgba(0, 245, 255, 0.4), inset 0 0 8px rgba(0, 245, 255, 0.2);
     }
 
@@ -471,6 +476,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: var(--font-jp);
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--cyan-core);
       box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), inset 0 0 10px rgba(0, 245, 255, 0.25);
       background: rgba(0, 245, 255, 0.06);
     }
@@ -866,13 +875,7 @@
           <span class="studio-meta-title">KAIZEN SOFTWARE STUDIO</span>
           <span class="studio-meta-sub">HYDERABAD · EST. 2024</span>
         </div>
-        <div class="studio-seal-stamp" title="Kaizen Software Studio">
-          <svg viewBox="0 0 120 120" style="width: 22px; height: 22px; filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.8));" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 22 15 L 42 15 L 42 105 L 22 105 Z" fill="#FFFFFF" />
-            <path d="M 22 56 L 88 15 L 105 15 L 38 67 Z" fill="url(#emblemGrad)" />
-            <path d="M 42 66 L 98 105 L 76 105 L 32 73 Z" fill="#FFFFFF" />
-          </svg>
-        </div>
+        <div class="studio-seal-stamp" title="Kaizen (改善) - Continuous Improvement">改善</div>
       </div>
     </header>
 
@@ -978,13 +981,13 @@
             <span class="mark-sub">Lambda Apex</span>
           </div>
 
-          <div style="color: var(--cyan-core); font-family: var(--font-mono); font-size: 16px; opacity: 0.6;">=</div>
+          <div style="color: var(--cyan-core); font-family: var(--font-mono); font-size: 16px; opacity: 0.6;">+</div>
 
           <div class="mark-item">
-            <div style="font-family: var(--font-sans); font-size: 28px; font-weight: 800; letter-spacing: 0.08em; display: flex; align-items: center; justify-content: center; line-height: 1; height: 50px;">
-              <span style="color: #FFFFFF;">K</span><span style="color: var(--cyan-core); text-shadow: 0 0 12px rgba(0, 245, 255, 0.8);">Λ</span>
+            <div class="seal-box-lg" style="width: 40px; height: 40px; font-size: 20px;">
+              改善
             </div>
-            <span class="mark-sub">KΛ Monogram</span>
+            <span class="mark-sub">Continuous Impr.</span>
           </div>
         </div>
         <div style="margin-top: 6px; font-family: var(--font-mono); font-size: 8px; color: var(--text-subtle); text-align: center;">
@@ -992,22 +995,16 @@
         </div>
       </div>
 
-      <!-- 4. STUDIO EMBLEM & ORIGIN -->
+      <!-- 4. STUDIO SEAL & ORIGIN -->
       <div class="box-card">
         <div class="box-header">
-          <div class="box-num-title"><span class="num">4.</span> STUDIO EMBLEM</div>
-          <span class="box-sublabel">EMBLEM &amp; ORIGIN</span>
+          <div class="box-num-title"><span class="num">4.</span> STUDIO SEAL</div>
+          <span class="box-sublabel">PHILOSOPHY &amp; ORIGIN</span>
         </div>
         <div class="seal-stage">
-          <div class="seal-box-lg">
-            <svg viewBox="0 0 120 120" style="width: 28px; height: 28px; filter: drop-shadow(0 0 10px rgba(0, 245, 255, 0.8));" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 22 15 L 42 15 L 42 105 L 22 105 Z" fill="#FFFFFF" />
-              <path d="M 22 56 L 88 15 L 105 15 L 38 67 Z" fill="url(#emblemGrad)" />
-              <path d="M 42 66 L 98 105 L 76 105 L 32 73 Z" fill="#FFFFFF" />
-            </svg>
-          </div>
+          <div class="seal-box-lg">改善</div>
           <div class="seal-sub-caption">
-            <strong style="color: #FFFFFF; font-size: 9px; display: block; letter-spacing: 1.5px;">KAIZEN SOFTWARE AGENCY</strong>
+            <strong style="color: #FFFFFF; font-size: 9px; display: block; letter-spacing: 1.5px;">KAIZEN · 改善</strong>
             "Continuous Improvement for the Better"<br>
             Bespoke Digital Systems · Hyderabad, India
           </div>
